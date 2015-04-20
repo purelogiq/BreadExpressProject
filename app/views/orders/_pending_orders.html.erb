@@ -1,0 +1,10 @@
+<% if @pending_orders.empty? %>
+  <h5><em>No pending orders at this time.</em></h5>
+<% else %>
+  <%= render :partial => "order_list", locals: {status: 'Pending', orders: @pending_orders} %> 
+  <br />
+  <%= link_to(eval("new_order_path"), class: "button radius") do %>
+    &nbsp;Add a New Order
+  <% end %> 
+<% end %>
+

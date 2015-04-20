@@ -1,0 +1,42 @@
+<div class="contain-to-grid">
+  <nav class="top-bar" data-topbar>
+    <section class="top-bar-section">
+      <ul class="left">
+        <!-- link to home -->
+        <li><%= link_to "Home", home_path %></li>
+        <% if !logged_in? %>
+          <li><%= link_to "View Menu", items_path %></li>
+        <% end %>
+        <% if logged_in? && (current_user.role?(:admin) || current_user.role?(:customer)) %>
+          <!-- options for orders -->
+          <li class="has-dropdown">
+            <%= link_to "Orders", orders_path %>
+            <ul class="dropdown">
+              <li><%= link_to "My Orders", orders_path %></li>
+              <li><%= link_to "New Order", new_order_path %></li>
+            </ul>
+          </li>
+
+          <!-- options for addresses -->
+          <li class="has-dropdown">
+            <%= link_to "Addresses", addresses_path %>
+            <ul class="dropdown">
+              <li><%= link_to "My Addresses", addresses_path %></li>
+              <li><%= link_to "Add an Address", new_address_path %></li>
+            </ul>
+          </li>
+        <% end %>
+
+        <!-- ADMIN ONLY OPTIONS -->
+
+
+
+
+
+
+
+
+
+    </section>
+  </nav>
+</div>

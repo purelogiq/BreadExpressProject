@@ -1,0 +1,31 @@
+<% unless items.nil? || items.empty? %>
+  <h5><%= item_type.capitalize %></h5>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="300">Name</th>
+        <th width="100">Price</th>
+        <th width="100">Units</th>
+        <% if controller.controller_name == 'orders' %>
+          <th width="100">&nbsp;</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= number_to_currency item.current_price %></td>
+          <td><%= item.units_per_item %> <%= item_type == 'bread' ? 'loaf' : item_type %></td>
+          <% if controller.controller_name == 'orders' %>
+            <td>
+              <%= link_to(add_to_cart_path(item.id), class: 'button tiny radius') do %>
+                &nbsp;Add to Cart&nbsp;
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
