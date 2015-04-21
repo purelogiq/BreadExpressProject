@@ -210,8 +210,21 @@ namespace :db do
           zip: "#{rand(100000).to_s.rjust(5,"0")}")          
       end
     end
-
     # Step 6: Create some orders for each customer
+    # create credit cards to be used for order payments
+    next_year = Date.today.year + 1
+    credit_cards = [
+      CreditCard.new(4123456789012, next_year, 12),
+      CreditCard.new(4123456789012345, next_year, 12),
+      CreditCard.new(5123456789012345, next_year, 12),
+      CreditCard.new(5412345678901234, next_year, 12),
+      CreditCard.new(6512345678901234, next_year, 12),
+      CreditCard.new(6011123456789012, next_year, 12),
+      CreditCard.new(30012345678901, next_year, 12),
+      CreditCard.new(30312345678901, next_year, 12),
+      CreditCard.new(341234567890123, next_year, 12),
+      CreditCard.new(371234567890123, next_year, 12)
+    ]
     all_customers.each do |customer|
       c_address_ids = customer.addresses.map(&:id)
       customer_selections = all_items.shuffle
@@ -235,6 +248,12 @@ namespace :db do
         # record total and payment
         total += order.shipping_costs
         order.update_attribute(:grand_total, total)
+        # set credit card info
+        credit_card = credit_cards.sample
+        order.credit_card_number = credit_card.number
+        order.expiration_year = credit_card.expiration_year
+        order.expiration_month = credit_card.expiration_month
+        # pay
         order.pay
         # ship the items
         order.order_items.each{|oi2| oi2.shipped_on = order.date + 1; oi2.save! }
