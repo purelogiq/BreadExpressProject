@@ -2,8 +2,6 @@ class HomeController < ApplicationController
   include BreadExpressHelpers::Baking
 
   def home
-
-
   end
 
   def about
@@ -14,10 +12,5 @@ class HomeController < ApplicationController
 
   def contact
   end
-
-
-
-
-
 
 end

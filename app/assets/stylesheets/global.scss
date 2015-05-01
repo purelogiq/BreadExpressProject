@@ -1,0 +1,98 @@
+// SASS file holding global styles.
+
+// Helpers
+@import 'components/prefixer';
+
+body {
+  background-color: #555;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.strikethrough{
+  text-decoration: line-through;
+}
+
+.faded-bg-image{
+  @include opacity(.54)
+}
+
+.raised-text {
+  text-shadow: 2px 2px #888;
+  @include opacity(1);
+}
+
+.round-fieldset{
+  @include border-radius(5px);
+  padding: 10px 30px 30px 30px
+}
+
+.round-table{
+  @include border-radius(10px);
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.no-margin-bot{
+  margin-bottom: 1px;
+}
+
+.side-btn{
+  margin-top: 15px;
+}
+
+// Credit to http://mislav.uniqpath.com/will_paginate/ for fancy pagination styling
+.apple_pagination {
+  text-align: center;
+  padding: 1em;
+  cursor: default;
+}
+.apple_pagination a, .apple_pagination span {
+  padding: 0.2em 0.3em;
+}
+.apple_pagination .disabled {
+  color: #aaaaaa;
+}
+.apple_pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background-color: #bebebe;
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.5;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px;
+}
+.apple_pagination a {
+  text-decoration: none;
+  color: black;
+}
+.apple_pagination a:hover, .apple_pagination a:focus {
+  text-decoration: underline;
+}
+
+#notice{
+  background-color: #BCED91;
+  color: #3B5323;
+  border: 1px solid #458B00;
+  @include border-radius(5px);
+  padding: 2px 8px 2px 8px;
+}
+
+#error_explanation{
+  background-color: #EE6363;
+  color: #660000;
+  border: 1px solid #8B0000;
+  @include border-radius(5px);
+  padding: 5px 8px 0px 8px;
+  margin-bottom: 10px;
+}

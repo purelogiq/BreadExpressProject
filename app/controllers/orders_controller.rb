@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   before_action :check_login
   before_action :set_order, only: [:show, :update, :destroy]
-  authorize_resource
+  #authorize_resource
   
   def index
     if logged_in? && !current_user.role?(:customer)

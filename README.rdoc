@@ -1,4 +1,4 @@
-## 67-272: Bread Express ##
+## 67-272: Bread Express (imadueme@andrew.cmu.edu) ##
 
 This will be the starter code for the course project in 67-272: Application Design and Development.  More notes will follow depending on the phase of the project.
 

@@ -12,9 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
-//= require foundation
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+// Setup Materialize components
+$(document).ready(function(){
+  $(".dropdown-button").dropdown({hover: false});
+  $(".button-collapse").sideNav();
+  $('.parallax').parallax();
+  $('.collapsible').collapsible({
+    accordion : false
+  });
+  $('select').material_select();
+
+});
 

@@ -1,3 +1,61 @@
+<% content_for :title, "Bread Express - Home" %>
+<% content_for :page_heading, "Welcome to Bread Express' Administration Panel" %>
+<% content_for :page_info, "Manage all parts of the Bread Express business here, all in one place!" %>
 
-	<%= render :partial => 'general_home' %>
+<div class="section white z-depth-5">
+  <div class="container">
+    <h4 class="header">Getting Started</h4>
+    <div class="divider"></div>
+    <div class="row">
+      <!-- Manage Customers Card -->
+      <div class="col s12 m4 l4">
+        <div class="card">
+          <div class="card-image">
+            <a href="/customers"><%= image_tag 'customers_card.jpg' %></a>
+            <span class="card-title">Customers</span>
+          </div>
+          <div class="card-content">
+            <p>Here you can view all customers, and a new customer, make updates to existing customers,
+              see a customer's recent orders, and more. </p>
+          </div>
+          <div class="card-action">
+            <a href="/customers">Manage Customers Now</a>
+          </div>
+        </div>
+      </div>
+      <!-- Manage Addresses Card -->
+      <div class="col s12 m4 l4">
+        <div class="card">
+          <div class="card-image">
+            <a href="/addresses"><%= image_tag 'address_card.jpg' %></a>
+            <span class="card-title">Addresses</span>
+          </div>
+          <div class="card-content">
+            <p>Here you can view all addresses, both billing and shipping, and a new address, make updates
+            to existing addresses, and so much more.</p>
+          </div>
+          <div class="card-action">
+            <a href="/addresses">Manage Addresses Now</a>
+          </div>
+        </div>
+      </div>
+      <!-- Manage Orders Card -->
+      <div class="col s12 m4 l4">
+        <div class="card">
+          <div class="card-image">
+            <a href="/orders"><%= image_tag 'orders_card.jpg' %></a>
+            <span class="card-title">Orders</span>
+          </div>
+          <div class="card-content">
+            <p>Here you can view all orders, see the details of each order, make updates to an order,
+              find customers who placed an order, and so much more.</p>
+          </div>
+          <div class="card-action">
+            <a href="/orders">Manage Orders Now</a>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </div>
+</div>

@@ -1,28 +1,72 @@
-<div class="row">
-	<div class="small-7 columns">
-		<h2>Contact Bread Express</h2>
-		<p class="supertiny">&nbsp;</p>
-		<table cellpadding="3">
-			<tr>
-				<td>Webmaster:&nbsp;&nbsp;&nbsp;</td>
-				<td>Professor Larry Heimann</td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td>
-				<%= mail_to("profh@cmu.edu", "Klingon Code Warrior*", :encode => "javascript") %> 
-				</td>
-			</tr>
-			<tr>
-				<td>Phone:</td>
-				<td>412-268-8211</td>
-			</tr>
-		</table>
+<% content_for :title, "Contact Us - Bread Express" %>
+<% content_for :page_heading, "Contact Us at Bread Express" %>
+<% content_for :page_info, "Leave a message using the form below!" %>
 
-		<p class="note"><br>*I am a professor of information systems at Carnegie Mellon University and this nickname was a little joke between myself and my students that I adopted as my signature for all my programming work.  
-			<br><br><em>... in truth I am only half-Klingon.</em></p>
-			
-			<p>&nbsp;</p>
-			<p>&nbsp;</p>
-	</div>
+<div class="section white z-depth-5">
+    <div class="container">
+      <h4>Contact Us</h4>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s12 m6">
+          <table>
+            <tbody>
+            <tr>
+              <td><h5>Email Us:</h5></td>
+              <td><a href="mailto:breadexpress@example.com">breadexpress@example.com</a></td>
+            </tr>
+            <tr>
+              <td><h5>Phone:</h5></td>
+              <td>(412) 555-5555</td>
+            </tr>
+            <tr>
+              <td><h5>Address:</h5></td>
+              <td>5000 Forbes Ave.<br />Pittsburgh, PA 15213</td>
+            </tr>
+            </tbody>
+          </table>
+          <h5>Find Us Here!</h5>
+          <a href="https://maps.google.com/?q=40.442492,-79.942553">
+            <img class="center z-depth-3" style="border: 2px solid #bbb"
+                 src="https://maps.googleapis.com/maps/api/staticmap?markers=color:red|label:|40.442492,-79.942553&size=400x300&zoom=15" />
+          </a>
+        </div>
+        <div class="col s12 m6">
+          <h5>Or send us a message!</h5>
+          <form action="mailto:breadexpress@example.com" method="post" class="col s12">
+            <fieldset class="z-depth-1 round-fieldset" style="">
+              <legend>Message Us</legend>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="first_name" type="text" class="validate" required="required">
+                  <label for="first_name">First Name*</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="last_name" type="text" class="validate" required="required">
+                  <label for="last_name">Last Name*</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="email" type="email" class="validate" required="required">
+                  <label for="email">Email*</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="phone" type="text" class="validate">
+                  <label for="phone">Phone</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="message" class="materialize-textarea"></textarea>
+                  <label for="textarea1">Message</label>
+                </div>
+              </div>
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="mdi-content-send right"></i>
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
 </div>

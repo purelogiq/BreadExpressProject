@@ -2,7 +2,7 @@ class CustomersController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :check_login, except: [:new]
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  authorize_resource
+  #authorize_resource
   
   def index
     @active_customers = Customer.active.alphabetical.paginate(:page => params[:page]).per_page(10)
@@ -15,7 +15,6 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
-
   end
 
   def edit

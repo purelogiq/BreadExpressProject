@@ -3,12 +3,14 @@ source 'https://rubygems.org'
 # Gems rails wants automatically
 gem 'rails', '4.0.13'
 gem 'sqlite3'
-gem 'sass-rails', '4.0.2'
+gem 'sass'
+gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '2.5.0'
 gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '3.1.0'
 # gem 'turbolinks', '2.2.1'
 gem 'jbuilder', '1.5.3'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -23,12 +25,10 @@ gem 'chronic', '0.10.2'
 gem 'simple_form', '3.1.0'
 gem 'nested_form', '0.3.2'
 gem 'font-awesome-sass-rails', '3.0.2.2'
-gem 'jquery-ui-rails', '5.0.3'
 gem 'cancancan', '1.9.2'
 gem 'validates_timeliness', '3.0.14'
 gem 'carrierwave', '0.10.0'
 gem 'time_date_helpers', '0.0.2'
-gem 'foundation-rails'
 
 # Additional gems that are very useful in Rails development
 group :development do

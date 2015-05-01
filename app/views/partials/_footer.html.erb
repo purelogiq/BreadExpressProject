@@ -1,15 +1,33 @@
-
-<footer>
-
-	<%= link_to 'Home', home_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
-  <%= link_to 'About Bread Express', about_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
-	<%= link_to 'Contact Us', contact_path %>&nbsp;&nbsp;::&nbsp;&nbsp;
-	<%= link_to 'Privacy Policy', privacy_path %>
-	<br /><br />
-	
-	<div id="copy">
-		Webmaster: <%= mail_to("YOU@andrew.cmu.edu", "YOUR NAME HERE", encode: "javascript") %> 
-		&nbsp;&nbsp;&copy 2015
-	</div>
-
+<div class="parallax-container" style="height: 200px">
+  <div class="parallax"><%= image_tag "bg-#{rand(0..6)}.jpg" %></div>
+</div>
+<footer id="footer" class="page-footer" style="margin-top: 0px">
+  <div class="container">
+    <div class="row">
+      <div class="col l8 s12">
+        <h5 class="white-text">Bread Express</h5>
+        <p class="grey-text text-lighten-4">Bread Express is not a real bread and pastry store. It is just a
+        project for CMU 67-272. Unfortunately, you won't actually be able to order delicious bread and pastries (mmmmm).
+        If you actually paid money to Bread Express, you have been scammed. Follow us on social media!</p>
+        <a href="http://facebook.com"><%= image_tag('facebook-icon.png', height: 64) %></a>
+        <a href="http://twitter.com"><%= image_tag('twitter-icon.png', height: 64) %></a>
+        <a href="http://pinterest.com"><%= image_tag('pinterest-icon.png', height: 64) %></a>
+      </div>
+      <div class="col l3 offset-l1 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="/">Home</a></li>
+          <li><a class="grey-text text-lighten-3" href="/about">About Us</a></li>
+          <li><a class="grey-text text-lighten-3" href="/contact">Contact Us</a></li>
+          <li><a class="grey-text text-lighten-3" href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      © 2015 Copyright Bread Express
+      <span class="grey-text text-lighten-4 right">Webmaster: Israel Madueme (imadueme)</span>
+    </div>
+  </div>
 </footer>
