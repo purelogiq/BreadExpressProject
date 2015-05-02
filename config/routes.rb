@@ -21,6 +21,10 @@ BreadExpress::Application.routes.draw do
   get 'search' => 'home#search', as: :search
   get 'cylon' => 'errors#cylon', as: :cylon
 
+  # Ajax calls
+  post 'update_cart' => 'shopping#update_cart', as: :update_cart
+  post 'remove_from_cart' => 'shopping#remove_from_cart', as: :remove_from_cart
+
   # Set the root url
   root :to => 'home#home'  
   

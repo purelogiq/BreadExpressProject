@@ -1,0 +1,6 @@
+$('#cart_trigger_btn').html("<%= j(render 'home/cart_count') %>");
+$('#cart_modal').html("<%= j(render 'home/cart') %>");
+if(!$('#cart_modal').is(':visible')){
+  $('#cart_modal').openModal();
+}
+

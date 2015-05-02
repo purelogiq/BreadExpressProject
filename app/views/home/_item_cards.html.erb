@@ -1,0 +1,30 @@
+<% @items.each do |item| %>
+  <div class="col s4">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="<%= safe_picture_url(item.picture) %>" />
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4 truncate" style="font-size: 1.2em">
+            <%= item.name %>
+          </span>
+          <p><strong><%= number_to_currency item.current_price %></strong>
+            <%= link_to "Add to Cart", update_cart_path(item_id: item.id, change_in_quantity: 1),
+                                                remote: true, method: :post, class: 'float-right' %>
+          </p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4" style="font-size: 1.2em">
+            <%= item.name %> <i class="mdi-navigation-close right"></i>
+          </span>
+          <span class="bold"><%= number_to_currency item.current_price %></span><br />
+          <%= link_to  raw('<i class="mdi-action-add-shopping-cart"></i> Add to Cart'),
+                      update_cart_path(item_id: item.id, change_in_quantity: 1),
+                      remote: true, method: :post, class: 'waves-effect waves-light btn add-cart-btn' %>
+          <p><%= item.description %></p>
+          <span>Comes in groups of <%= item.units_per_item %></span><br />
+          <span>Weight: <%= item.weight %> lbs</span><br /><br />
+        </div>
+      </div>
+  </div>
+<% end %>

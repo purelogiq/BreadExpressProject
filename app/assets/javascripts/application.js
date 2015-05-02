@@ -23,6 +23,8 @@ $(document).ready(function(){
     accordion : false
   });
   $('select').material_select();
+  $('#home-side-bar').pushpin({ top: $('#2-col-wrapper').offset().top });
+  $('.modal-trigger').leanModal();
 
 });
 

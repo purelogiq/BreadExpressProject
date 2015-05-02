@@ -10,3 +10,8 @@ To set this up, clone this repository, run the `bundle install` command to ensur
 Many objects are created with some element of randomness so you will get slightly different results each time it is run.  However, employee-type users are fixed.  In terms of employee-type users there are two admins -- Alex (username: 'alex') and Mark (username: 'mark') -- and a shipper (username: 'shipper') and a baker (username: 'baker').  All customers have a username which is 'user' with a sequential set of numbers concatentated. (user1 - user120 should exist for you to log in as and experiment.)  All users in the system have a password of 'secret'.  
 
 Instructions for what needs to be done for this project can be found in the write-up found on the [67-272 course site](http://67272.cmuis.net/projects).
+
+Notes:
+This site is responsive but not designed for very small mobile screens. At least 1000px of width is needed on at least an 8in wide screen.
+Promoted items are implemented as random, just for presentation purposes.
+An assumption is made that the bakery doesn't have hundreds of active items at once and so the item listing for customers is not paginated.

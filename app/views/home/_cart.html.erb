@@ -1,0 +1,47 @@
+<div id='cart-details' class="modal-content container">
+  <h4>Shopping Cart</h4>
+  <div class="divider"></div><br />
+  <% if !logged_in? %>
+    <div class="valign-wrapper">
+      <h5 class="center-align italic">You must sign in to add item to the cart</h5>
+    </div>
+  <% elsif @cart_order_items.nil? || @cart_order_items.empty? %>
+    <div class="valign-wrapper">
+      <h5 class="center-align italic">Your cart is empty</h5>
+    </div>
+  <% else %>
+    <% @cart_order_items.each do |order_item| %>
+      <div class="row">
+        <div class="col s1">
+          <img style="width: 100%; height: auto" src='<%= safe_picture_url order_item.item.picture %>' />
+        </div>
+        <div class="col s5">
+          <span class="truncate"><%= order_item.item.name %></span>
+        </div>
+        <div class="col s3">
+          <%= link_to  raw('<i class="mdi-content-remove"></i>'),
+                       update_cart_path(item_id: order_item.item.id, change_in_quantity: -1),
+                       remote: true, method: :post, class: 'btn-floating btn waves-effect waves-light red' %>
+          <h5 style="display: inline"><%= order_item.quantity %></h5>
+          <%= link_to  raw('<i class="mdi-content-add"></i>'),
+                       update_cart_path(item_id: order_item.item.id, change_in_quantity: 1),
+                       remote: true, method: :post, class: 'btn-floating btn waves-effect waves-light red'%>
+        </div>
+        <div class="col s2">
+          <h5><%= number_to_currency(order_item.subtotal) %></h5>
+        </div>
+        <div class="col s1">
+          <%= link_to raw('<i class="mdi-content-clear"></i>'), remove_from_cart_path(item_id: order_item.item.id),
+                      remote: true, method: :post, class: 'btn-floating btn waves-effect waves-light red' %>
+        </div>
+      </div>
+      <div class="divider"></div><br />
+    <% end %>
+  <% end %>
+</div>
+<div class="modal-footer container" style="z-index: 1000">
+  <div class="valign-wrapper float-right">
+    <span id='cart-subtotal' style="font-size: 1.5em; margin-right: 20px">Subtotal: <%= number_to_currency @cart_total %></span>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn ">Checkout</a>
+  </div>
+</div>

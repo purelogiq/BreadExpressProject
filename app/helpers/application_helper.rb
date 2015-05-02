@@ -7,4 +7,11 @@ module ApplicationHelper
     end
     addresses.map{|addr| ["#{addr.recipient} : #{addr.street_1}", addr.id] }
   end
+
+  def safe_picture_url(picture)
+    return image_path 'orders_card.jpg' if picture.nil? || picture == ""
+    return picture if picture =~ /\Ahttps?:\/\//
+    image_path picture
+  end
+
 end

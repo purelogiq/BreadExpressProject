@@ -5,6 +5,11 @@
 
 body {
   background-color: #555;
+  min-width: 1000px;
+}
+
+.container{
+  width: 75%
 }
 
 .italic{
@@ -46,6 +51,45 @@ body {
 .side-btn{
   margin-top: 15px;
 }
+
+#home-side-bar{
+  padding-top: 10px;
+  width: 250px; // Prevents pushpin width resizing bug in materialize
+}
+
+.side-bar-btn {
+  width: 90%;
+}
+
+.add-cart-btn{
+  font-size: .8em;
+  color: #FFF !important;
+}
+
+.float-right{
+  float: right
+}
+
+.float-left{
+  float: left
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Credit to http://mislav.uniqpath.com/will_paginate/ for fancy pagination styling
 .apple_pagination {

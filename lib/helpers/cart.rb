@@ -17,13 +17,18 @@ module BreadExpressHelpers
       session[:cart] = nil
     end
 
-    def add_item_to_cart(item_id)
+    def update_item_in_cart(item_id, change_in_quantity)
       if session[:cart].keys.include?(item_id)
-        # if item in cart, increment quantity by 1
-        session[:cart][item_id] += 1
+        # if item in cart, update quantity
+        session[:cart][item_id] += change_in_quantity
+
       else
         # add it to the cart
-        session[:cart][item_id] = 1
+        session[:cart][item_id] = change_in_quantity
+      end
+      # Remove zero/negative quantity
+      if session[:cart][item_id] <= 0
+        remove_item_from_cart item_id
       end
     end
 
