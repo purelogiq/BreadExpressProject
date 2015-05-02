@@ -1,22 +1,32 @@
-<h3>Log In</h3>
-<div class="row">
-  <div class="small-7 columns">
-    <%= form_tag :sessions do %>
-      <div class="control-group">
-        <%= label_tag :username %>
-        <div class="controls">
-          <%= text_field_tag :username, params[:username] %>
-        </div>
-      </div>
+<% content_for :title, "Log In - Bread Express" %>
+<% content_for :page_heading, "Login" %>
+<% content_for :page_info, "Enter your username and password below." %>
 
-      <div class="control-group">
-        <%= label_tag :password %>
-        <div class="controls">
-          <%= password_field_tag :password %>
-        </div>
+<div class="section white z-depth-5">
+  <div class="container">
+    <%= render 'partials/flash' %>
+    <br />
+    <div class="row">
+      <div class="col s6 offset-s3">
+        <%= form_tag :sessions do %>
+          <fieldset class="round-fieldset">
+            <div class="row">
+              <i class="mdi-action-account-circle prefix"></i>
+              <%= label_tag :username %>
+              <%= text_field_tag :username, params[:username], required: 'required' %>
+            </div>
+            <div class="row">
+              <i class="mdi-hardware-security prefix"></i>
+              <%= label_tag :password %>
+              <%= password_field_tag :password, nil, required: 'required' %>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Login
+              <i class="mdi-content-send right"></i>
+            </button>
+          </fieldset>
+      <% end %>
       </div>
-
-      <div class="actions"><%= submit_tag "Log In" %></div>
-    <% end %>
+    </div>
   </div>
 </div>
+

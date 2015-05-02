@@ -12,6 +12,28 @@ body {
   width: 75%
 }
 
+.alert-box{
+  padding: 5px;
+  border: 1px solid darkred;
+  @include border-radius(5px);
+  background-color: lightcoral;
+}
+
+.alert-box a{
+  color: black;
+}
+
+.notice-box{
+  padding: 5px;
+  border: 1px solid darkgreen;
+  @include border-radius(5px);
+  background-color: lightgreen;
+}
+
+.notice-box a{
+  color: black;
+}
+
 .italic{
   font-style: italic;
 }

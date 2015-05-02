@@ -1,0 +1,6 @@
+<% flash.each do |name, msg| %>
+  <div class="<%= flash[:notice] ? "notice-box" : "alert-box" %>">
+    <a href="#" onclick="this.closest('div').remove()"><i class="mdi-action-highlight-remove"></i></a>
+    <%= msg %>
+  </div>
+<% end %>
