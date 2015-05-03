@@ -16,6 +16,10 @@
 
 // Setup Materialize components
 $(document).ready(function(){
+  if($('#home-side-bar').length) { // Only do this if this element is present (on home page) b/c it breaks forms.
+    $('#home-side-bar').pushpin({top: $('#2-col-wrapper').offset().top});
+    $('.modal-trigger').leanModal();
+  }
   $(".dropdown-button").dropdown({hover: false});
   $(".button-collapse").sideNav();
   $('.parallax').parallax();
@@ -23,8 +27,5 @@ $(document).ready(function(){
     accordion : false
   });
   $('select').material_select();
-  $('#home-side-bar').pushpin({ top: $('#2-col-wrapper').offset().top });
-  $('.modal-trigger').leanModal();
-
 });
 

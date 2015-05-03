@@ -15,7 +15,7 @@ body {
 .alert-box{
   padding: 5px;
   border: 1px solid darkred;
-  @include border-radius(5px);
+  border-radius: 5px;
   background-color: lightcoral;
 }
 
@@ -26,7 +26,7 @@ body {
 .notice-box{
   padding: 5px;
   border: 1px solid darkgreen;
-  @include border-radius(5px);
+  border-radius: 5px;
   background-color: lightgreen;
 }
 
@@ -47,21 +47,21 @@ body {
 }
 
 .faded-bg-image{
-  @include opacity(.54)
+  opacity: .54;
 }
 
 .raised-text {
   text-shadow: 2px 2px #888;
-  @include opacity(1);
+  opacity: 1;
 }
 
 .round-fieldset{
-  @include border-radius(5px);
+  border-radius: 5px;
   padding: 10px 30px 30px 30px
 }
 
 .round-table{
-  @include border-radius(10px);
+  border-radius: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -81,6 +81,7 @@ body {
 
 .side-bar-btn {
   width: 90%;
+  margin-bottom: 5px;
 }
 
 .add-cart-btn{
@@ -150,7 +151,7 @@ body {
   background-color: #BCED91;
   color: #3B5323;
   border: 1px solid #458B00;
-  @include border-radius(5px);
+  border-radius: 5px;
   padding: 2px 8px 2px 8px;
 }
 
@@ -158,7 +159,7 @@ body {
   background-color: #EE6363;
   color: #660000;
   border: 1px solid #8B0000;
-  @include border-radius(5px);
+  border-radius: 5px;
   padding: 5px 8px 0px 8px;
   margin-bottom: 10px;
 }
