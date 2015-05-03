@@ -13,6 +13,8 @@ class Item < ActiveRecord::Base
   scope :active,       -> { where(active: true) }
   scope :inactive,     -> { where(active: false) }
   scope :for_category, ->(category) { where(category: category) }
+
+  accepts_nested_attributes_for :item_prices
   
   # Validations
   validates :name, presence: true, uniqueness: { case_sensitive: false }
