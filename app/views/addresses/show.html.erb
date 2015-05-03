@@ -1,0 +1,27 @@
+<% content_for :title, format_address_plain(@address) %>
+<% content_for :page_heading, "Address Details" %>
+<% content_for :page_info, "View the details of an address on this page." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot"><%= link_to "Addresses", addresses_path %> > <%= "#{@address.street_1}, #{@address.zip}" %></h4>
+      </div>
+      <div class="col s12 m3">
+        <a class="waves-effect waves-light btn-large side-btn" href="<%= edit_address_path @address %>"><i class="mdi-editor-mode-edit left"></i>Edit Address</a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <% if current_user.role? :admin %>
+      <p><span class="bold">Customer: </span><%= link_to @address.customer.proper_name, customer_path(@address.customer) %></p>
+    <% end %>
+    <p><span class="bold">Recipient: </span><%= @address.recipient %></p>
+    <p><span class="bold">Street 1: </span><%= @address.street_1 %></p>
+    <p><span class="bold">Street 2: </span><%= @address.street_2 %></p>
+    <p><span class="bold">City, State Zip: </span><%= "#{@address.city}, #{@address.state} #{@address.zip}" %></p>
+    <p><span class="bold">Is Billing?: </span><%= @address.is_billing ? "Yes":"No" %></p>
+    <p><span class="bold">Active?: </span><%= @address.active ? "Yes":"No" %></p>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="row">
+  <%= simple_form_for(@address, html: { class: 'col s12' }) do |f| %>
+    <% if @address.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-error">
+          The form contains <%= pluralize(@address.errors.count, "error") %>.
+        </div>
+        <ul>
+          <% @address.errors.full_messages.each do |msg| %>
+            <li>* <%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset class="round-fieldset z-depth-1">
+      <div class="row no-margin-bot">
+        <div class="input-field col s12 m6">
+          <%= f.select :customer_id,
+                       !current_user.role?(:admin) ? [[current_user.customer.name, current_user.customer.id]] :
+                       [["Choose a customer", -1]] + Customer.active.alphabetical.to_a.map{ |c| [c.name, c.id]}
+          %>
+          <%= f.label :customer_id, "Customer" %>
+        </div>
+        <div class="input-field col s12 m6">
+          <%= f.input_field :recipient %>
+          <%= f.label :recipient, "Recipient Name" %>
+        </div>
+      </div>
+      <div class="row no-margin-bot">
+        <div class="input-field col s12 m6">
+          <%= f.input_field :street_1 %>
+          <%= f.label :street_1, "Street Line 1" %>
+        </div>
+        <div class="input-field col s12 m6">
+          <%= f.input_field :street_2 %>
+          <%= f.label :street_2, "Street Line 2" %>
+        </div>
+      </div>
+      <div class="row no-margin-bot">
+        <div class="input-field col s12 m4">
+          <%= f.input_field :city %>
+          <%= f.label :city, "City" %>
+        </div>
+        <div class="input-field col s12 m4">
+          <%= f.input_field :state, collection: Address::STATES_LIST, prompt: "Choose a State" %>
+          <%= f.label :state, "State" %>
+        </div>
+        <div class="input-field col s12 m4">
+          <%= f.input_field :zip %>
+          <%= f.label :zip, "Zip Code" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.check_box :is_billing %>
+          <%= f.label :is_billing, "Is Billing Address?" %>
+        </div>
+        <div class="input-field col s6">
+          <%= f.check_box :active %>
+          <%= f.label :active %>
+        </div>
+      </div>
+      <br />
+      <div class="row no-margin-bot">
+        <div class="col s12">
+          <button class="btn waves-effect waves-light" type="submit" name="action" style="z-index: 0;">
+            Submit<i class="mdi-content-send right"></i>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
+
+

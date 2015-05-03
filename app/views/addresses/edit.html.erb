@@ -1,0 +1,11 @@
+<% content_for :title, "Edit Address" %>
+<% content_for :page_heading, "Edit an address" %>
+<% content_for :page_info, "Edit an address' info in the system." %>
+<div class="section white z-depth-5">
+  <div class="container">
+    <h4 class="left-align"><%= link_to "Addresses", addresses_path %> >
+      <%= link_to "#{@address.street_1}, #{@address.zip}", address_path(@address) %> > Edit</h4>
+    <div class="divider" style="margin-bottom: 5px"></div>
+    <%= render 'form' %>
+  </div>
+</div>

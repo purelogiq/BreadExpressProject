@@ -1,0 +1,66 @@
+<% content_for :title, "Addresses" %>
+<% content_for :page_heading, "Manage Addresses" %>
+<% content_for :page_info, "View all active and inactive addresses on this page." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot"><%= @show_active ? 'Active Addresses' : 'Inactive Addresses' %></h4>
+        <% unless @no_addresses %>
+          <% if @show_active %>
+            <a href="/addresses?show_inactive=true">Show Inactive Addresses</a>
+          <% else %>
+            <a href="/addresses">Show Active Addresses</a>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col s12 m3">
+        <a class="waves-effect waves-light btn-large side-btn" href="<%= new_address_path %>"><i class="mdi-content-add left"></i>New Address</a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <% if @no_addresses  %>
+      <h5>There are no addresses at this time.</h5>
+    <% elsif @addresses == nil || @addresses.empty? %>
+      <%= "No #{@show_active ? "active" : "inactive"} addresses."%>
+    <% else %>
+      <table class="striped z-depth-1 round-table">
+        <thead>
+          <tr>
+            <% unless current_user.role? :customer %>
+              <th>Customer</th>
+            <% end %>
+            <th>Recipient</th>
+            <th>Address</th>
+            <th>Billing?</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @addresses.each do |address| %>
+          <tr>
+            <% unless current_user.role? :customer %>
+              <td><%= link_to address.customer.proper_name, customer_path(address.customer) %></td>
+            <% end %>
+            <td><%= address.recipient %></td>
+            <td><%= link_to raw(format_address_plain(address)), address_path(address) %></td>
+            <td><%= address.is_billing ? "Yes":"No" %></td>
+            <td><%= link_to raw('<i class="mdi-image-edit"></i>'), edit_address_path(address),
+                    class: 'btn-floating btn waves-effect waves-light red' %></td>
+            <td><%= link_to( raw('<i class="mdi-content-clear"></i>'), address_path(address), method: 'delete',
+                            confirm: "Are you sure you want to delete this address?",
+                            class: 'btn-floating btn waves-effect waves-light red') if address.active || address.is_destroyable? %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= page_entries_info @addresses %>
+      <div class="apple_pagination">
+        <%= will_paginate @addresses, :container => false %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -4,13 +4,22 @@ class AddressesController < ApplicationController
   #authorize_resource
   
   def index
+    @no_addresses = Address.all.empty?
+    @show_active = !(params[:show_inactive] == 'true')
     if current_user.role? :customer
-      @active_addresses = current_user.customer.addresses.active.by_recipient.paginate(:page => params[:page]).per_page(10)
-      @inactive_addresses = current_user.customer.addresses.inactive.by_recipient.paginate(:page => params[:page]).per_page(10)      
+      if @show_active
+        @addresses = current_user.customer.addresses.active.by_recipient.paginate(:page => params[:page]).per_page(10)
+      else
+        @addresses = current_user.customer.addresses.inactive.by_recipient.paginate(:page => params[:page]).per_page(10)
+      end
     else
-      @active_addresses = Address.active.by_customer.by_recipient.paginate(:page => params[:page]).per_page(10)
-      @inactive_addresses = Address.inactive.by_customer.by_recipient.paginate(:page => params[:page]).per_page(10)
+      if @show_active
+        @addresses = Address.active.by_customer.by_recipient.paginate(:page => params[:page]).per_page(10)
+      else
+        @addresses = Address.inactive.by_customer.by_recipient.paginate(:page => params[:page]).per_page(10)
+      end
     end
+
   end
 
   def show
@@ -25,7 +34,6 @@ class AddressesController < ApplicationController
 
   def create
     @address = Address.new(address_params)
-    
     if @address.save
       redirect_to addresses_path, notice: "The address was added to the system."
     else
@@ -35,7 +43,7 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to addresses_path, notice: "The address was revised in the system."
+      redirect_to @address, notice: "The address was revised in the system."
     else
       render action: 'edit'
     end
@@ -43,7 +51,7 @@ class AddressesController < ApplicationController
 
   def destroy
     @address.destroy
-    redirect_to addresss_url, notice: "The address was removed from the system."
+    redirect_to addresses_url, notice: "The address was successfully deleted or made inactive."
   end
 
   private
