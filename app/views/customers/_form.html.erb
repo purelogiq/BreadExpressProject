@@ -14,6 +14,9 @@
   <% end %>
 
   <fieldset class="round-fieldset z-depth-1">
+    <%= f.fields_for :user do |user_form| %>
+      <%= render 'users/form', f: user_form  %>
+    <% end %>
     <div class="row no-margin-bot">
       <div class="input-field col s12 m6">
         <%= f.input_field :first_name%>

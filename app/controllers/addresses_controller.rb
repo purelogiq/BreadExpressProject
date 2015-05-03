@@ -19,7 +19,6 @@ class AddressesController < ApplicationController
         @addresses = Address.inactive.by_customer.by_recipient.paginate(:page => params[:page]).per_page(10)
       end
     end
-
   end
 
   def show

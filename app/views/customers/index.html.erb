@@ -31,6 +31,7 @@
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,8 @@
               <td><%= link_to "#{customer.name}", customer %></td>
               <td><%= format_phone(customer.phone) %></td>
               <td><%= mail_to customer.email %></td>
+              <td><%= link_to raw('<i class="mdi-image-edit"></i>'), edit_customer_path(customer),
+                              class: 'btn-floating btn waves-effect waves-light red' %></td>
             </tr>
           <% end %>
         </tbody>

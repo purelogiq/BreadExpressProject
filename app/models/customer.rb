@@ -8,7 +8,7 @@ class Customer < ActiveRecord::Base
   belongs_to :user
 
   # Allow user to be nested within customer
-  accepts_nested_attributes_for :user, reject_if: ->(user) { user[:username].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :user, allow_destroy: true
 
   # Scopes
   scope :alphabetical,  -> { order(:last_name).order(:first_name) }

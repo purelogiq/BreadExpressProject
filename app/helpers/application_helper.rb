@@ -20,9 +20,9 @@ module ApplicationHelper
   end
 
   # Formats address as: Street_1, [Street 2, ]City, State Zip
-  def format_address_plain addr
-    street_2 = (addr.street_2 == nil || addr.street_2 == "") ? "" : (addr.street_2 + "<br />")
-    "#{addr.street_1}<br />#{street_2}#{addr.city}, #{addr.state} #{addr.zip}"
+  def format_address_plain(addr, sep = "<br />")
+    street_2 = (addr.street_2 == nil || addr.street_2 == "") ? "" : (addr.street_2 + sep)
+    "#{addr.street_1}#{sep}#{street_2}#{addr.city}, #{addr.state} #{addr.zip}"
   end
 
   # Formats date as: mm/dd/yy

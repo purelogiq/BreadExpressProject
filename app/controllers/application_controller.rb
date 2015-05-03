@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin?
+    return false if current_user.nil?
     current_user.role? :admin
   end
   helper_method :is_admin?
