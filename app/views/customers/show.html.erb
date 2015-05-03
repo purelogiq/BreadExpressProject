@@ -1,0 +1,80 @@
+<% content_for :title, @customer.proper_name %>
+<% content_for :page_heading, "#{ is_admin? ? 'Customer Details' : 'Your Account Info'}" %>
+<% content_for :page_info, "View #{is_admin?? 'a customer\'s' : 'your'} detailed information on this page.'" %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot">
+          <%= link_to("Customers", customers_path) + " > " if is_admin? %>
+          <%= @customer.proper_name %></h4>
+      </div>
+      <div class="col s12 m3">
+        <a class="waves-effect waves-light btn-large side-btn" href="<%= edit_customer_path @customer %>">
+          <i class="mdi-editor-mode-edit left"></i><%= is_admin? ? 'Edit Customer' : 'Edit Info' %></a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <p><span class="bold">First Name: </span><%= @customer.first_name %></p>
+    <p><span class="bold">Last Name: </span><%= @customer.last_name %></p>
+    <p><span class="bold">Phone: </span><%= format_phone @customer.phone %></p>
+    <p><span class="bold">Email: </span><%= mail_to @customer.email %></p>
+    <p><span class="bold">Membership: </span>A Bread Express customer since <%= @customer.created_at.year %></p>
+    <% if is_admin? %>
+      <p><span class="bold">Active?: </span><%= @customer.active ? "Yes":"No" %></p>
+    <% end %>
+    <div class="divider"></div><br />
+    <div class="row">
+      <div class="col s6">
+      <% if @order_history.empty? %>
+        <p class="bold">No orders yet.</p>
+      <% else %>
+        <h4 class="no-margin-bot"><%= link_to "Order History", orders_path %></h4>
+        <table class="striped z-depth-1 round-table">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @order_history.each do |order| %>
+            <tr>
+              <td><%= link_to format_date(order.date), order_path(order) %></td>
+              <td><%= format_price order.grand_total %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      </div>
+      <div class="col s6">
+        <% if @addresses.empty? %>
+          <p class="bold">No addresses yet.</p>
+        <% else %>
+          <h4 class="no-margin-bot"><%= link_to "Addresses", addresses_path %></h4>
+          <table class="striped z-depth-1 round-table">
+            <thead>
+            <tr>
+              <th>Recipient</th>
+              <th>Address</th>
+              <th>Billing?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @addresses.each do |address| %>
+              <tr>
+                <td><%= address.recipient %></td>
+                <td><%= link_to raw(format_address_plain(address)), address_path(address) %></td>
+                <td><%= address.is_billing ? "Yes":"No" %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

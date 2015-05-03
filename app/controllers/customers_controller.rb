@@ -5,12 +5,18 @@ class CustomersController < ApplicationController
   #authorize_resource
   
   def index
-    @active_customers = Customer.active.alphabetical.paginate(:page => params[:page]).per_page(10)
-    @inactive_customers = Customer.inactive.alphabetical.paginate(:page => params[:page]).per_page(10)
+    @no_customers = Customer.all.empty?
+    @show_active = !(params[:show_inactive] == 'true')
+    if @show_active
+      @customers = Customer.active.alphabetical.paginate(page: params[:page]).per_page(10)
+    else
+      @customers = Customer.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
+    end
   end
 
   def show
-    @previous_orders = @customer.orders.chronological
+    @order_history = @customer.orders.chronological
+    @addresses = @customer.addresses.by_recipient
   end
 
   def new
@@ -20,8 +26,6 @@ class CustomersController < ApplicationController
   def edit
     # reformat phone w/ dashes when displayed for editing (preference; not required)
     @customer.phone = number_to_phone(@customer.phone)
-    # should have a user associated with customer, but just in case...
-
   end
 
   def create
@@ -54,10 +58,12 @@ class CustomersController < ApplicationController
   end
 
   def reset_role_param
+    params[:customer][:user_attributes] ||= {}
     params[:customer][:user_attributes][:role] = "customer"
   end
 
   def reset_username_param
+    params[:customer][:user_attributes] ||= {}
     params[:customer][:user_attributes][:username] = @customer.user.username
   end
 end

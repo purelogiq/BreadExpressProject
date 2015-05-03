@@ -1,0 +1,53 @@
+<% content_for :title, "Customers" %>
+<% content_for :page_heading, "Manage Customers" %>
+<% content_for :page_info, "View all active and inactive customers on this page." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot"><%= @show_active ? 'Active Customers' : 'Inactive Customers' %></h4>
+        <% unless @no_customers %>
+          <% if @show_active %>
+            <a href="/customers?show_inactive=true">Show Inactive Customers</a>
+          <% else %>
+            <a href="/customers">Show Active Customers</a>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col s12 m3">
+        <a class="waves-effect waves-light btn-large side-btn" href="<%= new_customer_path %>"><i class="mdi-content-add left"></i>New Customer</a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <% if @no_customers %>
+      <h5>No active customers at this time.</h5>
+    <% elsif @customers == nil || @customers.empty? %>
+        <%= "No #{@show_active ? "active" : "inactive"} customers."%>
+    <% else %>
+      <table class="striped z-depth-1 round-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td><%= link_to "#{customer.name}", customer %></td>
+              <td><%= format_phone(customer.phone) %></td>
+              <td><%= mail_to customer.email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= page_entries_info @customers %>
+      <div class="apple_pagination">
+        <%= will_paginate @customers, :container => false %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

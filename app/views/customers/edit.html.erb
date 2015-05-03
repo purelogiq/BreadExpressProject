@@ -1,0 +1,10 @@
+<% content_for :title, "Edit #{is_admin?? 'Customer' : 'Your Account'}" %>
+<% content_for :page_heading, "Edit #{is_admin?? 'a customer' : 'your account'}" %>
+<% content_for :page_info, "Edit #{is_admin?? 'a customer\'s' : 'your account'} information on this page." %>
+<div class="section white z-depth-5">
+  <div class="container">
+    <h4 class="left-align">
+      <%= link_to("Customers", customers_path) + " > " if is_admin? %><%= link_to @customer.proper_name, customer_path(@customer) %> > Edit</h4>
+    <%= render 'form' %>
+  </div>
+</div>

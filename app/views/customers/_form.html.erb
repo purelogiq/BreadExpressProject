@@ -1,0 +1,57 @@
+<div class="row">
+<%= simple_form_for(@customer, html: { class: 'col s12' }) do |f| %>
+  <% if @customer.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@customer.errors.count, "error") %>.
+      </div>
+      <ul>
+        <% @customer.errors.full_messages.each do |msg| %>
+          <li>* <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset class="round-fieldset z-depth-1">
+    <div class="row no-margin-bot">
+      <div class="input-field col s12 m6">
+        <%= f.input_field :first_name%>
+        <%= f.label :first_name, "First Name"  %>
+      </div>
+      <div class="input-field col s12 m6">
+        <%= f.input_field :last_name %>
+        <%= f.label :last_name, "Last Name"  %>
+      </div>
+    </div>
+    <div class="row no-margin-bot">
+      <div class="input-field col s12 m6">
+        <%= f.input_field :email %>
+        <%= f.label :email %>
+      </div>
+      <div class="input-field col s12 m6">
+        <%= f.input_field :phone %>
+        <%= f.label :phone %>
+      </div>
+    </div>
+    <% if is_admin? # Don't let customer disable account since they can't enable it again %>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.check_box :active %>
+          <%= f.label :active %>
+        </div>
+      </div>
+    <% end %>
+    <br />
+    <div class="row no-margin-bot">
+      <div class="col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="mdi-content-send right"></i>
+        </button>
+      </div>
+    </div>
+  </fieldset>
+<% end %>
+</div>
+
+
