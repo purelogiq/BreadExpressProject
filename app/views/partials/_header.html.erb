@@ -23,7 +23,9 @@
           <li><a href="/addresses">Addresses</a></li>
           <li><a href="/orders">Orders</a></li>
         <% elsif current_user.role? :customer %>
-
+          <li><%= link_to "My Account", current_user.customer %></li>
+          <li><a href="/addresses">My Addresses</a></li>
+          <li><a href="/orders">My Orders</a></li>
         <% end %>
         <% if logged_in? %>
           <li><a href="/logout">Logout</a></li>

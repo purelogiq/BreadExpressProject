@@ -16,7 +16,7 @@
         <div id="home-side-bar">
           <% if logged_in? %>
             <a id="cart_trigger_btn" class=" modal-trigger waves-effect waves-light btn-large side-bar-btn" href="#cart_modal">
-              <%= render 'cart_count' %></a>
+              <%= render 'cart_count' %></a><br />
           <% else %>
             <a class="waves-effect waves-light btn-large side-bar-btn" href="/login">Login</a><br />
             <a class="waves-effect waves-light btn-large side-bar-btn" href="/signup">Sign Up</a><br />
