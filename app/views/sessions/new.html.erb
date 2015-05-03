@@ -11,14 +11,18 @@
         <%= form_tag :sessions do %>
           <fieldset class="round-fieldset">
             <div class="row">
-              <i class="mdi-action-account-circle prefix"></i>
-              <%= label_tag :username %>
-              <%= text_field_tag :username, params[:username], required: 'required' %>
+              <div class="input-field col s12">
+                <i class="mdi-action-account-circle prefix"></i>
+                <%= label_tag :username %>
+                <%= text_field_tag :username, params[:username], required: 'required' %>
+              </div>
             </div>
             <div class="row">
-              <i class="mdi-hardware-security prefix"></i>
-              <%= label_tag :password %>
-              <%= password_field_tag :password, nil, required: 'required' %>
+              <div class="input-field col s12">
+                <i class="mdi-hardware-security prefix"></i>
+                <%= label_tag :password %>
+                <%= password_field_tag :password, nil, required: 'required' %>
+              </div>
             </div>
             <div class="row center-align">
               <div class="col s6">

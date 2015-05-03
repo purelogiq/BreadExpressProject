@@ -14,12 +14,14 @@
   <% end %>
   <fieldset class="round-fieldset z-depth-1">
     <%= render 'form', f: f %>
-    <div class="row no-margin-bot">
-      <div class="input-field col s12">
-        <%= f.check_box :active %>
-        <%= f.label :active, "Active?"  %>
+    <% if is_admin? %>
+      <div class="row no-margin-bot">
+        <div class="input-field col s12">
+          <%= f.check_box :active %>
+          <%= f.label :active, "Active?"  %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <br />
     <div class="row no-margin-bot">
       <div class="col s12">

@@ -33,8 +33,15 @@ class UsersController < ApplicationController
     if current_user.username == @user.username && current_user.role?(:admin) && params[:user][:role] != "admin"
       @user.errors.add(:role, "Cannot set your own admin account to a lower role, ask another admin to change it.")
     end
+    # Force employees to change password since that is all they can do on this page.
+    # They should leave the page if they don't want to change their password.
+    if (current_user.role?(:shipper) || current_user.role?(:baker)) && params[:user][:password].blank?
+      @user.errors.add(:password, "cannot be blank.")
+    end
+    reset_user_params unless is_admin?
     if @user.errors.empty? && @user.update(user_params)
-      redirect_to users_path, notice: "#{@user.username} was revised in the system."
+      redirect_to users_path, notice: "#{@user.username} was revised in the system." if is_admin?
+      redirect_to root_path, notice: "Your account info was successfully updated." unless is_admin?
     else
       render action: 'edit'
     end
@@ -43,6 +50,12 @@ class UsersController < ApplicationController
   private
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def reset_user_params
+    params[:user][:role] = @user.role
+    params[:user][:username] = @user.username
+    params[:user][:active] = true
   end
 
   def user_params

@@ -1,11 +1,14 @@
-<% if !logged_in? || current_user.role?(:shipper) || current_user.role?(:baker) %>
-  <!-- Drop down for general pages in nav bar -->
-  <ul id="general-pages-dropdown" class="dropdown-content">
-    <li><a href="/about">About Us</a></li>
+<% if is_admin? %>
+  <ul id="admin-pages-dropdown" class="dropdown-content" style="z-index: 1000">
+    <li><a href="/users">Employees</a></li>
     <li class="divider"></li>
-    <li><a href="/contact">Contact Us</a></li>
+    <li><a href="/customers">Customers</a></li>
     <li class="divider"></li>
-    <li><a href="/privacy">Privacy Policy</a></li>
+    <li><a href="/addresses">Addresses</a></li>
+    <li class="divider"></li>
+    <li><a href="/orders">Orders</a></li>
+    <li class="divider"></li>
+    <li><a href="/items">Items</a></li>
   </ul>
 <% end %>
 
@@ -14,25 +17,31 @@
     <div class="nav-wrapper container">
       <a href="/" class="brand-logo">Bread Express</a>
       <ul class="right">
-        <% if current_user.nil? || current_user.role?(:shipper) || current_user.role?(:baker) %>
-          <li><a class="dropdown-button" href="#!" data-activates="general-pages-dropdown">More Of Us<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+        <% if current_user.nil? %>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        <% elsif current_user.role?(:shipper) %>
+          <li><a href="#">View Shipping List</a></li>
+          <li><%= link_to "Change Password", edit_user_path(current_user) %></li>
+        <% elsif current_user.role?(:baker) %>
+          <li><a href="#">View Baking List</a></li>
+          <li><%= link_to "Change Password", edit_user_path(current_user) %></li>
         <% elsif current_user.role? :admin %>
-          <li><a href="/manage">Manage</a></li>
           <li><a href="/shop">Shop</a></li>
-          <li><a href="/users">Employees</a></li>
-          <li><a href="/customers">Customers</a></li>
-          <li><a href="/addresses">Addresses</a></li>
-          <li><a href="/orders">Orders</a></li>
+          <li><a href="/shop">Baking List</a></li>
+          <li><a href="/shop">Shipping List</a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="admin-pages-dropdown">Manage Business<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         <% elsif current_user.role? :customer %>
           <li><%= link_to "My Account", current_user.customer %></li>
           <li><a href="/addresses">My Addresses</a></li>
           <li><a href="/orders">My Orders</a></li>
         <% end %>
         <% if logged_in? %>
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="/logout"><i class="mdi-action-exit-to-app left"></i>Logout</a></li>
         <% else %>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/signup">Sign Up</a></li>
+          <li><a href="/login"><i class="mdi-action-exit-to-app right"></i>Login</a></li>
+          <li><a href="/signup"><i class="mdi-action-assignment right"></i>Sign Up</a></li>
         <% end %>
       </ul>
     </div>
@@ -41,7 +50,7 @@
 
 <!-- Small parallax image at top with informational text embedded -->
 <div class="parallax-container" style="height: 120px">
-  <div class="parallax faded-bg-image"><%= image_tag "bg-#{rand(0..6)}.jpg"%></div>
+  <div class="faded-bg-image parallax "><%= image_tag "bg-#{rand(0..6)}.jpg"%></div>
   <div class="container">
     <h4 class="center-align white-text raised-text no-margin-bot"><%= yield :page_heading %></h4>
     <p class="center-align white-text raised-text" style="margin: 2px"><%= yield :page_info %></p>

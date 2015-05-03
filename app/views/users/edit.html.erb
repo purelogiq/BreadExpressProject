@@ -1,9 +1,11 @@
-<% content_for :title, "Edit User" %>
-<% content_for :page_heading, "Edit Employee User" %>
-<% content_for :page_info, "Edit an employee's user account information here" %>
+<% content_for :title, "Edit #{is_admin?? 'Employee' : 'Your Account'}" %>
+<% content_for :page_heading, "Edit #{is_admin?? 'Employee' : 'your account'}" %>
+<% content_for :page_info, "Edit #{is_admin?? 'an employee\'s' : 'your account'} information on this page." %>
 <div class="section white z-depth-5">
   <div class="container">
-    <h4 class="left-align"><%= link_to "Users", users_path %> > Edit User</h4>
+    <h4 class="left-align">
+      <% if is_admin? %><%= link_to "Employees", users_path %> > <% end %>Edit Account
+    </h4>
     <div class="divider" style="margin-bottom: 5px"></div>
     <%= render 'full_user_form' %>
   </div>

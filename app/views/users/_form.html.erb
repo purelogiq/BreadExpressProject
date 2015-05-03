@@ -1,15 +1,23 @@
+<% if is_admin? %>
 <div class="row no-margin-bot">
-  <div class="input-field col <%= is_admin? ? 's6':'s12' %>">
+  <div class="input-field col s6">
     <%= f.input_field :username%>
     <%= f.label :username, "Username"  %>
   </div>
-  <% if is_admin? %>
     <div class="input-field col s6">
-      <%= f.select :role, User::ROLES %>
+      <%= f.select :role, User::ROLES[(0..2)] %>
       <%= f.label :role, "Role"  %>
     </div>
-  <% end %>
 </div>
+<% end %>
+<% if current_user.nil? %>
+  <div class="row no-margin-bot">
+    <div class="input-field col s12">
+      <%= f.input_field :username%>
+      <%= f.label :username, "Username"  %>
+    </div>
+  </div>
+<% end %>
 <div class="row no-margin-bot">
   <div class="input-field col s12 m6">
     <%= f.input_field :password%>

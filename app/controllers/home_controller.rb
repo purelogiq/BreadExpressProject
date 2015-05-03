@@ -21,10 +21,6 @@ class HomeController < ApplicationController
     handle_customer_home
   end
 
-  def manage
-    handle_admin_home
-  end
-
   def about
   end
 
