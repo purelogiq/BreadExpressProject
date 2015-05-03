@@ -6,8 +6,13 @@ class SessionsController < ApplicationController
   def create()
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to root_url
+      if user.active?
+        session[:user_id] = user.id
+        redirect_to root_url
+      else
+        flash.now.alert = "This user account is deactivated, contact an adminstrator to reactivate it."
+        render "new"
+      end
     else
       flash.now.alert = "Username or password is invalid"
       render "new"
