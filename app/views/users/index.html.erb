@@ -1,0 +1,52 @@
+<% content_for :title, "Users" %>
+<% content_for :page_heading, "Manage Employees" %>
+<% content_for :page_info, "Manage BreadExpress' employees' user accounts here." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot"><%= @show_active ? 'Active Employees' : 'Inactive Employees' %></h4>
+        <% if @show_active %>
+          <a href="/users?show_inactive=true">Show Inactive Employees</a>
+        <% else %>
+          <a href="/users">Show Active Employees</a>
+        <% end %>
+      </div>
+      <div class="col s12 m3">
+        <a class="waves-effect waves-light btn-large side-btn" href="<%= new_user_path %>"><i class="mdi-content-add left"></i>New Employee</a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <% if @users == nil || @users.empty? %>
+    <%= "No #{@show_active ? "active" : "inactive"} employees."%><br />
+    <% else %>
+      <table class="striped z-depth-1 round-table">
+        <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.role %></td>
+            <td><%= link_to raw('<i class="mdi-image-edit"></i>'), edit_user_path(user),
+                            class: 'btn-floating btn waves-effect waves-light red' %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <% if @users.any? %>
+      <%= page_entries_info @users %>
+      <div class="apple_pagination">
+        <%= will_paginate @users, :container => false %>
+      </div>
+    <% end %>
+  </div>
+</div>

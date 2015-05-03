@@ -1,0 +1,10 @@
+<% content_for :title, "Edit User" %>
+<% content_for :page_heading, "Edit Employee User" %>
+<% content_for :page_info, "Edit an employee's user account information here" %>
+<div class="section white z-depth-5">
+  <div class="container">
+    <h4 class="left-align"><%= link_to "Users", users_path %> > Edit User</h4>
+    <div class="divider" style="margin-bottom: 5px"></div>
+    <%= render 'full_user_form' %>
+  </div>
+</div>
