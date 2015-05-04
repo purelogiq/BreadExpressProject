@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
   has_many :order_items
   has_many :item_prices
   has_many :orders, through: :order_items
-  accepts_nested_attributes_for :item_prices, reject_if: ->(item_price) { item_price[:price].blank? }
+  accepts_nested_attributes_for :item_prices
 
   # Scopes
   scope :alphabetical, -> { order(:name) }
