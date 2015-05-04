@@ -1,0 +1,81 @@
+<% content_for :title, @item.name %>
+<% content_for :page_heading, "#{@item.name} Details" %>
+<% content_for :page_info, "View the details this item here. See the #{is_admin?? 'shop':'home'} page to shop." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot"><%= link_to "Items", items_path %> > <%= @item.name %></h4>
+      </div>
+      <div class="col s12 m3">
+        <% if is_admin? %>
+          <a class="waves-effect waves-light btn-large side-btn" href="<%= edit_item_path @item %>"><i class="mdi-editor-mode-edit left"></i>Edit Item</a>
+        <% elsif current_user.role? :customer %>
+          <a class="waves-effect waves-light btn-large side-btn" href="/shop"><i class="mdi-editor-mode-edit left"></i>Go Shopping</a>
+        <% end %>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <div class="row">
+      <div class="col s4">
+        <br />
+        <img style="width: 80%; height: auto" src="<%= safe_picture_url(@item.picture) %>" />
+        <% if @item.picture.nil? %>
+          <p class="bold">Picture not set, example picture is shown.</p>
+        <% end %>
+      </div>
+      <div class="col s8">
+        <p><span class="bold">Name: </span><%= @item.name %></p>
+        <p><span class="bold">Price: </span><%= format_price(@item.current_price) %></p>
+        <p><span class="bold">Description: </span><%= @item.description %></p>
+        <p><span class="bold">Category: </span><%= @item.category %></p>
+        <p><span class="bold">Units Per Item: </span><%= format_item_units(@item) %></p>
+        <p><span class="bold">Total weight: <%= @item.weight %> lbs.</span></p>
+        <p><span class="bold">Active?: </span><%= @item.active ? "Yes":"No" %></p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <% if is_admin? %>
+      <h4>Price History</h4>
+      <table class="striped z-depth-1 round-table">
+        <thead>
+          <tr>
+            <th>Price</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @price_history.each do |price| %>
+            <tr>
+              <td><%= format_price(price.price) %></td>
+              <td><%= format_date(price.start_date) %></td>
+              <td><%= price.end_date.nil? ? 'Ongoing':format_date(price.end_date) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h4>Similar Items</h4>
+      <% @similar_items.each do |similar_item| %>
+        <div class="row">
+          <div class="col s1">
+            <img style="width: 80%; height: auto" src="<%= safe_picture_url(@item.picture) %>" />
+          </div>
+          <div class="col s3">
+            <%= link_to similar_item.name, item_path(similar_item) %>
+          </div>
+          <div class="col s1">
+            <%= format_price similar_item.current_price %>
+          </div>
+          <div class="col s7">
+            <%= similar_item.description %>
+          </div>
+        </div>
+        <div class="divider" style="margin-bottom: 3px"></div>
+      <% end %>
+  <% end %>
+  </div>
+</div>

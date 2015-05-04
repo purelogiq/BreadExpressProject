@@ -1,0 +1,10 @@
+<% content_for :title, "Edit Item" %>
+<% content_for :page_heading, "Edit an item" %>
+<% content_for :page_info, "Add an item's details and its price here." %>
+<div class="section white z-depth-5">
+  <div class="container">
+    <h4 class="left-align"><%= link_to "Items", items_path %> > <%= link_to @item.name, item_path(@item) %> > Edit</h4>
+    <div class="divider" style="margin-bottom: 5px"></div>
+    <%= render 'form' %>
+  </div>
+</div>

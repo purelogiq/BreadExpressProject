@@ -34,4 +34,15 @@ module ApplicationHelper
   def format_price price
     "$#{'%.2f' % price}"
   end
+
+  def format_item_units item
+    case item.category
+    when 'bread'
+      pluralize(item.units_per_item, 'loaf')
+    when 'muffins'
+      pluralize(item.units_per_item, 'muffin')
+    when 'pastries'
+      pluralize(item.units_per_item, 'pastry')
+    end
+  end
 end

@@ -14,7 +14,7 @@
     </div>
     <div class="divider"></div>
     <%= render 'partials/flash' %>
-    <% if current_user.role? :admin %>
+    <% if is_admin? %>
       <p><span class="bold">Customer: </span><%= link_to @address.customer.proper_name, customer_path(@address.customer) %></p>
     <% end %>
     <p><span class="bold">Recipient: </span><%= @address.recipient %></p>

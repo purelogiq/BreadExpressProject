@@ -5,6 +5,7 @@ BreadExpress::Application.routes.draw do
   resources :customers
   resources :orders
   resources :users
+  resources :items
   resources :sessions
 
   # Authentication routes
@@ -30,14 +31,6 @@ BreadExpress::Application.routes.draw do
 
   # Set the root url
   root :to => 'home#home'  
-  
-  # Named routes
-  get 'ldfasa' => 'errors#cylon', as: :items
-  #get 'dsaf' => 'errors#cylon', as: :cylon
-  #get 'dsfdasf' => 'errors#cylon', as: :cylon
-  #get '45fd' => 'errors#cylon', as: :cylon
-
-
   
   # Last route in routes.rb that essentially handles routing errors
   get '*a', to: 'errors#routing'

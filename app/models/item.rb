@@ -2,12 +2,14 @@ class Item < ActiveRecord::Base
 
   # List of allowable categories
   CATEGORIES = [['Bread','bread'],['Muffins','muffins'],['Pastries','pastries']]
-  
+
+  # Field in place of a nested attribute
+  attr_accessor :new_price
+
   # Relationships
   has_many :order_items
   has_many :item_prices
   has_many :orders, through: :order_items
-  accepts_nested_attributes_for :item_prices
 
   # Scopes
   scope :alphabetical, -> { order(:name) }
@@ -47,11 +49,11 @@ class Item < ActiveRecord::Base
     end
   end
 
-  private
   def is_destroyable?
     @destroyable = self.order_items.shipped.empty?
   end
-  
+
+  private
   def convert_to_inactive
     if !@destroyable.nil? && @destroyable == false
       remove_unshipped_and_unpaid_order_items

@@ -1,0 +1,10 @@
+<% content_for :title, "New Item" %>
+<% content_for :page_heading, "Add a new item" %>
+<% content_for :page_info, "Add a new item to the system." %>
+<div class="section white z-depth-5">
+  <div class="container">
+    <h4 class="left-align"><%= link_to "Items", items_path %> > New Item</h4>
+    <div class="divider" style="margin-bottom: 5px"></div>
+    <%= render 'form' %>
+  </div>
+</div>

@@ -16,3 +16,4 @@ This site is responsive but not designed for very small mobile screens. At least
 Promoted items are implemented as random, just for presentation purposes.
 An assumption is made that the bakery doesn't have hundreds of active items at once and so the item listing for customers is not paginated.
 Please clear browser cache and cookies for localhost before use (or open in new private window/incognito mode)
+Users can view a filtered list of items by going to /items and details with the item show page BUT the site is designed for them to look at items on the /shop page. The /items page is there for the administrator and to pass cucumber tests.

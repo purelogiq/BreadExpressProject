@@ -1,0 +1,71 @@
+<div class="row">
+  <%= simple_form_for(@item, html: { class: 'col s12' }) do |f| %>
+    <% if @item.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-error">
+          The form contains <%= pluralize(@item.errors.count, "error") %>.
+        </div>
+        <ul>
+          <% @item.errors.full_messages.each do |msg| %>
+            <li>* <%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset class="round-fieldset z-depth-1">
+      <div class="row no-margin-bot">
+        <div class="input-field col s12 m6">
+          <%= f.input_field :name %>
+          <%= f.label :name, "Name" %>
+        </div>
+        <div class="input-field col s12 m6">
+          <%= f.select :category, Item::CATEGORIES %>
+          <%= f.label :category, "Category" %>
+        </div>
+      </div>
+      <div class="row no-margin-bot">
+        <div class="input-field col s4">
+          <%= f.input_field :units_per_item %>
+          <%= f.label :units_per_item, "Units Per Item" %>
+        </div>
+        <div class="input-field col s4">
+          <%= f.input_field :weight %>
+          <%= f.label :weight, "Weight" %>
+        </div>
+        <div class="input-field col s4">
+          <%= f.text_field :new_price %>
+          <%= f.label :new_price, "Price" %>
+        </div>
+      </div>
+      <div class="row no-margin-bot">
+        <div class="input-field col s12">
+          <%= f.input_field :picture %>
+          <%= f.label :picture, "Picture URL" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.input_field :description, as: :text, class: 'materialize-textarea' %>
+          <%= f.label :description, "Description" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.check_box :active %>
+          <%= f.label :active, "Active?" %>
+        </div>
+      </div>
+      <br />
+      <div class="row no-margin-bot">
+        <div class="col s12">
+          <button class="btn waves-effect waves-light" type="submit" name="action" style="z-index: 0;">
+            Submit<i class="mdi-content-send right"></i>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
+
+

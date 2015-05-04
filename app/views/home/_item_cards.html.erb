@@ -23,7 +23,7 @@
                       update_cart_path(item_id: item.id, change_in_quantity: 1),
                       remote: true, method: :post, class: 'waves-effect waves-light btn add-cart-btn' %>
           <p><%= item.description %></p>
-          <span>Comes in groups of <%= item.units_per_item %></span><br />
+          <span>Comes with <%= format_item_units(item) %></span><br />
           <span>Weight: <%= item.weight %> lbs</span><br /><br />
         </div>
       </div>

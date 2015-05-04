@@ -1,0 +1,70 @@
+<% content_for :title, "Items" %>
+<% content_for :page_heading, "#{is_admin?? 'Manage' : 'View'} Items" %>
+<% content_for :page_info, "View all items on this page." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <% if is_admin? %>
+          <h4 class="left-align no-margin-bot"><%= @show_active ? 'Available Items' : 'Unavailable Items' %></h4>
+          <% unless @no_items %>
+            <% if @show_active %>
+              <a href="/items?show_inactive=true">Show Unavailable Items</a>
+            <% else %>
+              <a href="/addresses">Show Available Items</a>
+            <% end %>
+          <% end %>
+        <% else %>
+          <h4 class="left-align no-margin-bot">Available Items</h4>
+        <% end %>
+      </div>
+      <div class="col s12 m3">
+        <% if is_admin? %>
+          <a class="waves-effect waves-light btn-large side-btn" href="<%= new_item_path %>"><i class="mdi-content-add left"></i>New Item</a>
+        <% end %>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <% if @no_items  %>
+      <h5>No active items at this time</h5>
+    <% elsif @items == nil || @items.empty? %>
+      <%= "No #{@show_active ? "active" : "inactive"} items."%>
+    <% else %>
+      <table class="striped z-depth-1 round-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Units</th>
+            <% if is_admin? %>
+              <th>Edit</th>
+              <th>Delete</th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= link_to item.name, item_path(item) %></td>
+            <td><%= item.current_price %></td>
+            <td><%= format_item_units(item) %></td>
+            <% if is_admin? %>
+              <td><%= link_to raw('<i class="mdi-image-edit"></i>'), edit_item_path(item),
+                      class: 'btn-floating btn waves-effect waves-light red' %></td>
+              <td><%= link_to( raw('<i class="mdi-content-clear"></i>'), item_path(item), method: 'delete',
+                              confirm: "Are you sure you want to delete this item?",
+                              class: 'btn-floating btn waves-effect waves-light red') if item.active || item.is_destroyable? %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= page_entries_info @items %>
+      <div class="apple_pagination">
+        <%= will_paginate @items, :container => false %>
+      </div>
+    <% end %>
+  </div>
+</div>

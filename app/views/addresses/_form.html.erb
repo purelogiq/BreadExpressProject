@@ -17,7 +17,7 @@
       <div class="row no-margin-bot">
         <div class="input-field col s12 m6">
           <%= f.select :customer_id,
-                       !current_user.role?(:admin) ? [[current_user.customer.name, current_user.customer.id]] :
+                       !is_admin? ? [[current_user.customer.name, current_user.customer.id]] :
                        [["Choose a customer", -1]] + Customer.active.alphabetical.to_a.map{ |c| [c.name, c.id]}
           %>
           <%= f.label :customer_id, "Customer" %>
