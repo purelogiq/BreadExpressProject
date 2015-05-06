@@ -1,0 +1,17 @@
+<% content_for :title, "#{is_admin?? 'New Order':'Checkout'}" %>
+<% content_for :page_heading, "#{is_admin?? 'Create An Order':'Checkout'}" %>
+<% content_for :page_info, "#{is_admin?? 'Create an order with the current cart for any customer.':
+                                         'Checkout your cart full of Bread Express goodies!'}" %>
+<div class="section white z-depth-5">
+  <div class="container">
+    <h4 class="left-align">
+      <% if is_admin? %>
+        <%= link_to("Orders", orders_path) %> > New Order
+      <% else %>
+        Checkout
+      <% end %>
+    </h4>
+    <div class="divider" style="margin-bottom: 5px"></div>
+    <%= render 'form' %>
+  </div>
+</div>

@@ -34,7 +34,8 @@ class AddressesController < ApplicationController
   def create
     @address = Address.new(address_params)
     if @address.save
-      redirect_to addresses_path, notice: "The address was added to the system."
+      redirect_to addresses_path,
+                  notice: "The address was added, you can now <a href='/orders/new' style='color: #0596F3'>checkout</a> an order with this address."
     else
       render action: 'new'
     end

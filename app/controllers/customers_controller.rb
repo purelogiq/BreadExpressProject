@@ -35,7 +35,7 @@ class CustomersController < ApplicationController
       redirect_to @customer, notice: "#{@customer.proper_name} was added to the system." if logged_in? && is_admin?
       unless logged_in? # Login in guest after they create an account
         session[:user_id] = @customer.user.id
-        redirect_to root_url
+        redirect_to root_url, notice: "You have successfully signed up!"
       end
     else
       render action: 'new'

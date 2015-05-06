@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col s6">
+    <h5>Order Summary</h5>
+    <table class="striped z-depth-1 round-table">
+      <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @order.order_items.each do |oi| %>
+        <tr>
+          <td><%= oi.item.name %></td>
+          <td><%= format_price oi.item.current_price %></td>
+          <td><%= oi.quantity %></td>
+          <td><%= format_price oi.subtotal %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <p style="font-size: 1.3em"><span class="bold">Shipping Costs: </span> <%= format_price @order.shipping_costs %></p>
+    <p style="font-size: 1.3em"><span class="bold">Grand Total: </span> <%= format_price @order.grand_total %></p>
+  </div>
+
+  <div class="col s6">
+    <h5>Pay</h5>
+    <%= simple_form_for(@order, html: { class: 'row' }) do |f| %>
+      <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-error">
+            The form contains <%= pluralize(@order.errors.count, "error") %>.
+          </div>
+          <ul>
+            <% @order.errors.full_messages.each do |msg| %>
+              <li>* <%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <fieldset class="round-fieldset z-depth-1">
+        <div class="row no-margin-bot">
+          <div class="input-field col s12">
+            <%= f.select :customer_id,
+                         !is_admin? ? [[current_user.customer.name, current_user.customer.id]] :
+                         [["Choose a customer", -1]] + Customer.active.alphabetical.to_a.map{ |c| [c.name, c.id]}
+            %>
+            <%= f.label :customer_id, "Customer" %>
+          </div>
+          <div class="input-field col s12">
+            <%= f.select :address_id,
+                         !is_admin? ? current_user.customer.addresses.active.to_a.map{|a| [format_address_plain(a, ' '), a.id]}:
+                                 [["Choose an address", -1]] + Address.active.to_a.map{|a| [format_address_plain(a, ' '), a.id]}
+            %>
+            <%= f.label :address_id, "Address" %>
+          </div>
+        </div>
+        <div class="row no-margin-bot">
+          <div class="input-field col s12">
+            <%= f.input_field :credit_card_number %>
+            <%= f.label :credit_card_number, "Credit Card Number" %>
+          </div>
+        </div>
+        <div class="row no-margin-bot">
+          <div class="input-field col s6">
+            <%= f.select :expiration_year, (Date.today.year..(Date.today.year+10)).to_a %>
+            <%= f.label :expiration_year, "Expiration Year" %>
+          </div>
+          <div class="input-field col s6">
+            <%= f.select :expiration_month, (1..12).to_a %>
+            <%= f.label :expiration_month, "Expiration Month" %>
+          </div>
+        </div>
+        <br />
+        <div class="row no-margin-bot">
+          <div class="col s12">
+            <button class="btn waves-effect waves-light" type="submit" name="action" style="z-index: 0;">
+              Order Now<i class="mdi-content-send right"></i>
+            </button>
+          </div>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+
+
+

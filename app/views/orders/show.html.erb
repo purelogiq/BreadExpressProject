@@ -1,0 +1,70 @@
+<% content_for :title, 'Order' %>
+<% content_for :page_heading, "Order Details" %>
+<% content_for :page_info, "View the details of your order on this page." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot"><%= link_to "Orders", orders_path %> > <%= "#{format_date(@order.date)} - #{format_price @order.grand_total}" %></h4>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <p><span class="bold">Date: </span><%= format_date(@order.date) %></p>
+    <% if is_admin? %>
+      <p><span class="bold">Customer: </span><%= link_to @order.customer.proper_name, customer_path(@order.customer) %></p>
+    <% end %>
+    <p><span class="bold">Address: </span><br />
+      <%= @order.address.recipient %><br />
+      <%= raw(format_address_plain(@order.address)) %></p>
+    <p><span class="bold">Grand Total: </span><%= format_price @order.grand_total %></p>
+    <p><span class="bold">Is Shipped?: </span><%= @order.is_editable?? "No":"Yes"%></p>
+    <div class="divider" style="margin-bottom: 5px"></div>
+    <h5>Order Summary</h5>
+    <table class="striped z-depth-1 round-table">
+      <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @order.order_items.each do |oi| %>
+        <tr>
+          <td><%= oi.item.name %></td>
+          <td><%= format_price oi.item.current_price %></td>
+          <td><%= oi.quantity %></td>
+          <td><%= format_price oi.subtotal %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="divider"></div>
+    <h5>Previous Orders</h5>
+    <% if @previous_orders.nil? || @previous_orders.empty? %>
+      <span>No previous orders</span>
+    <% else %>
+      <table class="striped z-depth-1 round-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Address</th>
+            <th>Grand Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @previous_orders.each do |po| %>
+            <tr>
+              <td><%= link_to format_date(po.date), order_path(po) %></td>
+              <td><%= format_address_plain po.address, " " %></td>
+              <td><%= format_price po.grand_total %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

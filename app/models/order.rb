@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
   validate :expiration_date_is_valid
 
   # Other methods
-  def is_editable?
+  def is_editable? # used as is pending
     !self.order_items.unshipped.empty?
   end
 
@@ -61,7 +61,10 @@ class Order < ActiveRecord::Base
   before_destroy :is_destroyable?
   after_destroy :remove_order_items
 
-  
+  def is_destroyable?
+    self.order_items.shipped.empty?
+  end
+
   private
   def customer_is_active_in_system
     is_active_in_system(:customer)
@@ -95,10 +98,6 @@ class Order < ActiveRecord::Base
       return false
     end
     true
-  end
-
-  def is_destroyable?
-    self.order_items.shipped.empty?
   end
 
   def remove_order_items

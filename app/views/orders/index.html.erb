@@ -1,0 +1,67 @@
+<% content_for :title, "Orders" %>
+<% content_for :page_heading, "Manage Orders" %>
+<% content_for :page_info, "View all orders on this page." %>
+
+<div class="section white z-depth-5">
+  <div class="container">
+    <div class="row no-margin-bot">
+      <div class="col s12 m9">
+        <h4 class="left-align no-margin-bot"><%= "Pending " unless @show_all %>Orders</h4>
+        <% unless @no_orders %>
+          <% if @show_all %>
+            <a href="/orders?show_pending=true">Show Pending Orders</a>
+          <% else %>
+            <a href="/orders">Show All Orders</a>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col s12 m3">
+        <% if is_admin? %>
+          <a class="waves-effect waves-light btn-large side-btn" href="<%= new_order_path %>"><i class="mdi-content-add left"></i>New Order</a>
+        <% end %>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <%= render 'partials/flash' %>
+    <% if @no_orders  %>
+      <h5>There are no orders at this time.</h5>
+    <% elsif @orders == nil || @orders.empty? %>
+      <%= "No #{@show_all ? "" : "pending"} orders."%>
+    <% else %>
+      <table class="striped z-depth-1 round-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <% if is_admin? %>
+              <th>Customer</th>
+            <% end %>
+            <th>Address</th>
+            <th>Grand Total</th>
+            <th>Pending?</th>
+            <th>Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to format_date(order.date), order_path(order) %></td>
+            <% if is_admin? %>
+              <td><%= link_to order.customer.proper_name, customer_path(order.customer) %></td>
+            <% end %>
+            <td><%= link_to raw(format_address_plain(order.address, " ")), address_path(order.address) %></td>
+            <td><%= format_price order.grand_total %></td>
+            <td><%= order.is_editable? ? "Yes":"Completed" %></td>
+            <td><%= link_to( raw('<i class="mdi-content-clear"></i>'), order_path(order), method: 'delete',
+                            confirm: "Are you sure you want to cancel this order?",
+                            class: 'btn-floating btn waves-effect waves-light red') if order.is_destroyable? %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= page_entries_info @orders %>
+      <div class="apple_pagination">
+        <%= will_paginate @orders, :container => false %>
+      </div>
+    <% end %>
+  </div>
+</div>
