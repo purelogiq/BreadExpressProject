@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @item.item_prices = [ItemPrice.new(price: 3.50)] # Default price so cucumber test can pass.
+    @item.new_price = 3.50  # Default price so cucumber test can pass.
   end
 
   def edit
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
     check_new_price
     if @item.errors.empty? && @item.save
       create_item_price
-      redirect_to items_path, notice: "The item was added to the system."
+      redirect_to item_path(@item), notice: "#{@item.name} was added to the system"
     else
       render action: 'new'
     end

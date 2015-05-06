@@ -48,7 +48,7 @@
         <% @items.each do |item| %>
           <tr>
             <td><%= link_to item.name, item_path(item) %></td>
-            <td><%= item.current_price %></td>
+            <td><%= format_price item.current_price %></td>
             <td><%= format_item_units(item) %></td>
             <% if is_admin? %>
               <td><%= link_to raw('<i class="mdi-image-edit"></i>'), edit_item_path(item),
