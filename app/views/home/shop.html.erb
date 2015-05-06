@@ -5,12 +5,8 @@
 <div class="section white z-depth-5">
   <div class="container">
     <div id='2-col-wrapper' class="row">
-      <div class="col s9" style="padding-right: 20px">
-        <h4 id="item-list-title">Our Full Menu</h4>
-        <div class="divider"></div>
-        <div class="row">
-          <%= render 'item_cards' %>
-        </div>
+      <div id="item-card-container" class="col s9" style="padding-right: 20px">
+        <%= render 'item_cards', items_title: 'Our Menu' %>
       </div>
       <div class="col s3">
         <div id="home-side-bar">
@@ -23,8 +19,20 @@
           <% end %>
           <div class="divider"></div>
           <div class="section">
-            <h5>Item Filters</h5>
-            <%= render 'item_filters' %>
+            <h5>Find By Category</h5>
+            <div class="collection">
+              <% (Item::CATEGORIES + [['All', 'all']]).each do |category| %>
+                <%= link_to category[0], filter_items_path(filter: category[1]),
+                                remote: true, method: :post, class: 'collection-item'%>
+              <% end %>
+            </div>
+          </div>
+          <div class="section">
+            <h5>Find By Price</h5>
+            <div class="collection">
+              <%= link_to 'Simple $6 Menu', filter_items_path(filter: 'filter_under_six'),
+                          remote: true, method: :post, class: 'collection-item'%>
+            </div>
           </div>
         </div>
       </div>

@@ -17,7 +17,8 @@
 // Setup Materialize components
 $(document).ready(function(){
   if($('#home-side-bar').length) { // Only do this if this element is present (on home page) b/c it breaks forms.
-    $('#home-side-bar').pushpin({top: $('#2-col-wrapper').offset().top});
+    $('#home-side-bar').pushpin({top: $('#2-col-wrapper').offset().top,
+                                 bottom: $('main').offset().top + $('main').height() - $('#home-side-bar').height()});
     $('.modal-trigger').leanModal();
   }
   $(".dropdown-button").dropdown({hover: false});

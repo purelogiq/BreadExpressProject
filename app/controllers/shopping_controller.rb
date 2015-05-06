@@ -10,7 +10,6 @@ class ShoppingController < ApplicationController
       @cart_order_items = []
       @cart_total = 0
     end
-
   end
 
   def remove_from_cart
@@ -23,5 +22,19 @@ class ShoppingController < ApplicationController
       @cart_total = 0
     end
     render 'update_cart'
+  end
+
+  def filter_items
+    filter = params[:filter]
+    if filter == 'filter_under_six'
+      @items = Item.active.alphabetical.to_a.select{|i| i.current_price < 6 }
+      @filter_title = 'Simple $6 Menu'
+    elsif Item::CATEGORIES.flatten.include?(filter)
+      @items = Item.active.for_category(filter).alphabetical
+      @filter_title = "Our #{filter.capitalize} Menu"
+    else
+      @items = Item.active.alphabetical
+      @filter_title = "Our Full Menu"
+    end
   end
 end

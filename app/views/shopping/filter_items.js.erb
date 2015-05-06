@@ -1,0 +1,3 @@
+$('#item-card-container').html("<%= j(render 'home/item_cards', items_title: @filter_title) %>");
+$('#home-side-bar').pushpin({top: $('#2-col-wrapper').offset().top,
+  bottom: $('main').offset().top + $('main').height() - $('#home-side-bar').height()});

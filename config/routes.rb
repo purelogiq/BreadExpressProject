@@ -28,6 +28,7 @@ BreadExpress::Application.routes.draw do
   # Ajax calls
   post 'update_cart' => 'shopping#update_cart', as: :update_cart
   post 'remove_from_cart' => 'shopping#remove_from_cart', as: :remove_from_cart
+  post 'filter_items' => 'shopping#filter_items', as: :filter_items
 
   # Set the root url
   root :to => 'home#home'  
