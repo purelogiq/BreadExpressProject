@@ -26,6 +26,7 @@ class ShoppingController < ApplicationController
 
   def filter_items
     filter = params[:filter]
+    @filter = filter
     if filter == 'filter_under_six'
       @items = Item.active.alphabetical.to_a.select{|i| i.current_price < 6 }
       @filter_title = 'Simple $6 Menu'

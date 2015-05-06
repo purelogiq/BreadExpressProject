@@ -18,12 +18,13 @@
             <a class="waves-effect waves-light btn-large side-bar-btn" href="/signup">Sign Up</a><br />
           <% end %>
           <div class="divider"></div>
-          <div class="section">
+          <div id="item-filters-section" class="section">
             <h5>Find By Category</h5>
             <div class="collection">
-              <% (Item::CATEGORIES + [['All', 'all']]).each do |category| %>
+              <% ([['All', 'all']] + Item::CATEGORIES).each do |category| %>
                 <%= link_to category[0], filter_items_path(filter: category[1]),
-                                remote: true, method: :post, class: 'collection-item'%>
+                                remote: true, method: :post, class: "collection-item #{'active' if category[1] == 'all'}",
+                                id: "#{category[1]}_filter_id"%>
               <% end %>
             </div>
           </div>
@@ -31,7 +32,8 @@
             <h5>Find By Price</h5>
             <div class="collection">
               <%= link_to 'Simple $6 Menu', filter_items_path(filter: 'filter_under_six'),
-                          remote: true, method: :post, class: 'collection-item'%>
+                          remote: true, method: :post, class: 'collection-item',
+                          id: "filter_under_six_filter_id" %>
             </div>
           </div>
         </div>
