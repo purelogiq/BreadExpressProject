@@ -22,15 +22,15 @@
           <li><a href="/contact">Contact Us</a></li>
           <li><a href="/privacy">Privacy Policy</a></li>
         <% elsif current_user.role?(:shipper) %>
-          <li><a href="#">View Shipping List</a></li>
+          <li><a href="/shipping_list">View Shipping List</a></li>
           <li><%= link_to "Change Password", edit_user_path(current_user) %></li>
         <% elsif current_user.role?(:baker) %>
-          <li><a href="#">View Baking List</a></li>
+          <li><a href="/baking_list">View Baking List</a></li>
           <li><%= link_to "Change Password", edit_user_path(current_user) %></li>
         <% elsif current_user.role? :admin %>
           <li><a href="/shop">Shop</a></li>
-          <li><a href="/shop">Baking List</a></li>
-          <li><a href="/shop">Shipping List</a></li>
+          <li><a href="/baking_list">Baking List</a></li>
+          <li><a href="/shipping_list">Shipping List</a></li>
           <li><a class="dropdown-button" href="#!" data-activates="admin-pages-dropdown">Manage Business<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         <% elsif current_user.role? :customer %>
           <li><%= link_to "My Account", current_user.customer %></li>

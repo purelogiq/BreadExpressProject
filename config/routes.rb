@@ -22,7 +22,8 @@ BreadExpress::Application.routes.draw do
   get 'privacy' => 'home#privacy', as: :privacy
   get 'shop' => 'home#shop', as: :shop
   get 'manage' => 'home#manage', as: :manage
-  get 'search' => 'home#search', as: :search
+  get 'baking_list' => 'home#baking', as: :baking_list
+  get 'shipping_list' => 'home#shipping', as: :shipping_list
   get 'cylon' => 'errors#cylon', as: :cylon
 
   # Ajax calls

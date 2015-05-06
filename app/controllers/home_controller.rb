@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   include BreadExpressHelpers::Cart
+  include BreadExpressHelpers::Baking
 
   def home
     if current_user.nil?
@@ -19,6 +20,19 @@ class HomeController < ApplicationController
 
   def shop
     handle_customer_home
+  end
+
+  def baking
+    handle_baker_home
+  end
+
+  def shipping
+    unless params[:order_item_id].nil? || params[:order_item_id].blank?
+      oi = OrderItem.find(params[:order_item_id])
+      oi.shipped_on = Date.today
+      oi.save
+    end
+    handle_shipper_home
   end
 
   def about
@@ -58,19 +72,13 @@ class HomeController < ApplicationController
   end
 
   def handle_baker_home
-    locals = {}
-    locals[:page_title] = "Bread Express Baking List"
-    locals[:page_heading] = "Welcome to Bread Express's Baking List"
-    locals[:page_info] = "See what needs to be baked today."
-    render 'home/baker_home', locals: locals
+    @baking_list = Item::CATEGORIES.map{|i| {category: i[0], list: create_baking_list_for(i[1])}}
+    render 'home/baker_home'
   end
 
   def handle_shipper_home
-    locals = {}
-    locals[:page_title] = "Bread Express Shipping Panel"
-    locals[:page_heading] = "Welcome to Bread Express' Shipping Panel"
-    locals[:page_info] = "Manage which the logistics of customer order here."
-    render 'home/shipper_home', locals: locals
+    @shipping_list = Order.not_shipped.chronological.to_a
+    render 'home/shipper_home'
   end
 
   def prepare_shop_page
