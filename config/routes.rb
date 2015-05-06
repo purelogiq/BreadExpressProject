@@ -16,7 +16,6 @@ BreadExpress::Application.routes.draw do
 
   # Semi-static page routes
   get 'home' => 'home#home', as: :home
-  get 'index' => 'home#home'
   get 'about' => 'home#about', as: :about
   get 'contact' => 'home#contact', as: :contact
   get 'privacy' => 'home#privacy', as: :privacy
@@ -24,6 +23,7 @@ BreadExpress::Application.routes.draw do
   get 'manage' => 'home#manage', as: :manage
   get 'baking_list' => 'home#baking', as: :baking_list
   get 'shipping_list' => 'home#shipping', as: :shipping_list
+  get 'ship_item' => 'home#ship_item', as: :ship_item
   get 'cylon' => 'errors#cylon', as: :cylon
 
   # Ajax calls

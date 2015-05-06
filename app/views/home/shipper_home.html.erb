@@ -13,7 +13,7 @@
         <ul class="collection" style="margin-bottom: 1px">
           <% order.order_items.unshipped.each do |oi| %>
             <%= link_to raw("#{oi.quantity} of #{oi.item.name}<span class='badge'>Click to mark as shipped</span>"),
-                        "/shipping_list?order_item_id=#{oi.id}", class: 'collection-item',
+                        "/ship_item?order_item_id=#{oi.id}", class: 'collection-item',
                         confirm: 'Are you sure your ready to mark this as shipped?' %>
           <% end %>
         </ul>
