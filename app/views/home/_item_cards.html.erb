@@ -1,35 +1,39 @@
 <h4 id="item-list-title"><%= items_title %></h4>
 <div class="divider"></div>
 <div class="row">
-<% @items.each do |item| %>
-  <div class="col s4">
-      <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator tooltipped" src="<%= safe_picture_url(item.picture) %>"
-               data-position="top" data-delay="2500" data-tooltip="Click for details"/>
+<% if @items.nil? || @items.empty? %>
+  <h4>No items yet, please check back soon!</h4>
+<% else %>
+  <% @items.each do |item| %>
+    <div class="col s4">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator tooltipped" src="<%= safe_picture_url(item.picture) %>"
+                 data-position="top" data-delay="2500" data-tooltip="Click for details"/>
+          </div>
+          <div class="card-content">
+            <span class="card-title activator blue-text text-darken-4 truncate" style="font-size: 1.2em">
+              <%= item.name %>
+            </span>
+            <p><strong><%= number_to_currency item.current_price %></strong>
+              <%= link_to "Add to Cart", update_cart_path(item_id: item.id, change_in_quantity: 1),
+                                                  remote: true, method: :post, class: 'float-right' %>
+            </p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4" style="font-size: 1.2em">
+              <%= item.name %> <i class="mdi-navigation-close right"></i>
+            </span>
+            <span class="bold"><%= number_to_currency item.current_price %></span><br />
+            <%= link_to  raw('<i class="mdi-action-add-shopping-cart"></i> Add to Cart'),
+                        update_cart_path(item_id: item.id, change_in_quantity: 1),
+                        remote: true, method: :post, class: 'waves-effect waves-light btn add-cart-btn' %>
+            <p><%= item.description %></p>
+            <span>Comes with <%= format_item_units(item) %></span><br />
+            <span>Weight: <%= item.weight %> lbs</span><br /><br />
+          </div>
         </div>
-        <div class="card-content">
-          <span class="card-title activator blue-text text-darken-4 truncate" style="font-size: 1.2em">
-            <%= item.name %>
-          </span>
-          <p><strong><%= number_to_currency item.current_price %></strong>
-            <%= link_to "Add to Cart", update_cart_path(item_id: item.id, change_in_quantity: 1),
-                                                remote: true, method: :post, class: 'float-right' %>
-          </p>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4" style="font-size: 1.2em">
-            <%= item.name %> <i class="mdi-navigation-close right"></i>
-          </span>
-          <span class="bold"><%= number_to_currency item.current_price %></span><br />
-          <%= link_to  raw('<i class="mdi-action-add-shopping-cart"></i> Add to Cart'),
-                      update_cart_path(item_id: item.id, change_in_quantity: 1),
-                      remote: true, method: :post, class: 'waves-effect waves-light btn add-cart-btn' %>
-          <p><%= item.description %></p>
-          <span>Comes with <%= format_item_units(item) %></span><br />
-          <span>Weight: <%= item.weight %> lbs</span><br /><br />
-        </div>
-      </div>
-  </div>
+    </div>
+  <% end %>
 <% end %>
 </div>
