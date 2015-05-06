@@ -1,3 +1,13 @@
+## Notes to graders ##
+This site is responsive but not designed for small mobile screens. About an 1000px of width is needed on at least an 8in wide screen.
+An assumption is made that the bakery doesn't have hundreds of active items at once and so the item listing on the store page is not paginated.
+Please clear browser cache and cookies for localhost before use (or open in new private window/incognito mode)
+Users can view a list of items by going to /items and details with the item show page BUT the site is designed for them to look at items on the /shop page. The /items page is there for the administrator and to pass cucumber tests.
+I believe I did the extra credit for toggling active/inactive items.
+You may like the errors page...
+
+
+
 ## 67-272: Bread Express (imadueme@andrew.cmu.edu) ##
 
 This will be the starter code for the course project in 67-272: Application Design and Development.  More notes will follow depending on the phase of the project.
@@ -11,9 +21,3 @@ Many objects are created with some element of randomness so you will get slightl
 
 Instructions for what needs to be done for this project can be found in the write-up found on the [67-272 course site](http://67272.cmuis.net/projects).
 
-Notes:
-This site is responsive but not designed for very small mobile screens. At least 1000px of width is needed on at least an 8in wide screen.
-Promoted items are implemented as random, just for presentation purposes.
-An assumption is made that the bakery doesn't have hundreds of active items at once and so the item listing for customers is not paginated.
-Please clear browser cache and cookies for localhost before use (or open in new private window/incognito mode)
-Users can view a filtered list of items by going to /items and details with the item show page BUT the site is designed for them to look at items on the /shop page. The /items page is there for the administrator and to pass cucumber tests.
