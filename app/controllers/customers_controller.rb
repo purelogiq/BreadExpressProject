@@ -2,7 +2,7 @@ class CustomersController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :check_login, except: [:new, :create]
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  #authorize_resource
+  authorize_resource
   
   def index
     @no_customers = Customer.all.empty?

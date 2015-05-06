@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :check_login, except: [:new, :create]
   before_action :set_user, only: [:edit, :update, :destroy]
-  #authorize_resource
+  authorize_resource
 
   def index
     @show_active = !(params[:show_inactive] == 'true')

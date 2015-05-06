@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
   include BreadExpressHelpers::Cart
+  include BreadExpressHelpers::Shipping
   before_action :check_login
   before_action :set_order, only: [:show, :destroy]
-  #authorize_resource
+  authorize_resource
   
   def index
     @no_orders = Order.all.empty?
@@ -39,10 +40,10 @@ class OrdersController < ApplicationController
       redirect_to '/addresses/new', alert: "Please create an address to send the order to."
     end
     @order = Order.new
-    @order.order_items = get_list_of_items_in_cart
-    @order.grand_total = @order.order_items.inject(@order.shipping_costs) do |sum, order_item|
-      sum + order_item.subtotal
-    end
+    @order_items = get_list_of_items_in_cart
+    @cart_cost = calculate_cart_items_cost
+    @shipping_cost = calculate_cart_shipping
+    @grand_total = @cart_cost + @shipping_cost
   end
 
   def create
@@ -50,7 +51,7 @@ class OrdersController < ApplicationController
     convert_cc_to_nums
     reset_fields
     if @order.errors.empty? && @order.save
-      # Also saves the order items automatically
+      save_each_item_in_cart(@order)
       clear_cart
       redirect_to @order, notice: "Thank you for ordering from Bread Express."
     else
@@ -71,10 +72,11 @@ class OrdersController < ApplicationController
   def reset_fields
     @order.customer_id = current_user.customer.id unless is_admin?
     @order.date = Date.today
-    @order.order_items = get_list_of_items_in_cart
-    @order.grand_total = @order.order_items.inject(@order.shipping_costs) do |sum, order_item|
-      sum + order_item.subtotal
-    end
+    @order_items = get_list_of_items_in_cart
+    @cart_cost = calculate_cart_items_cost
+    @shipping_cost = calculate_cart_shipping
+    @grand_total = @cart_cost + @shipping_cost
+    @order.grand_total = @grand_total
   end
 
   def convert_cc_to_nums

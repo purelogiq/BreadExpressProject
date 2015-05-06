@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :check_login
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  #authorize_resource
+  authorize_resource
 
   def index
     @no_items = Item.all.empty?

@@ -1,7 +1,7 @@
 class AddressesController < ApplicationController
   before_action :check_login
   before_action :set_address, only: [:show, :edit, :update, :destroy]
-  #authorize_resource
+  authorize_resource
   
   def index
     @no_addresses = Address.all.empty?

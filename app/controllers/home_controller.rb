@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   include BreadExpressHelpers::Cart
   include BreadExpressHelpers::Baking
+  before_action :check_login, except: [:home, :about, :privacy, :contact]
+  authorize_resource :class => false
 
   def home
     if current_user.nil?
@@ -27,12 +29,24 @@ class HomeController < ApplicationController
   end
 
   def shipping
-    unless params[:order_item_id].nil? || params[:order_item_id].blank?
-      oi = OrderItem.find(params[:order_item_id])
-      oi.shipped_on = Date.today
-      oi.save
-    end
     handle_shipper_home
+  end
+
+  def ship_item
+    unless params[:order_item_id].nil? || params[:order_item_id].blank?
+      begin
+        oiid = Integer(params[:order_item_id])
+        oi = OrderItem.find(oiid)
+        oi.shipped_on = Date.today
+        oi.save
+        redirect_to '/shipping_list', notice: "Order item was checked off."
+        return
+      rescue
+        redirect_to '/shipping_list', alert: "Unable to check off order item as shipped."
+        return
+      end
+    end
+    redirect_to '/shipping_list', alert: "Unable to check off order item as shipped."
   end
 
   def about
@@ -72,7 +86,7 @@ class HomeController < ApplicationController
   end
 
   def handle_baker_home
-    @baking_list = Item::CATEGORIES.map{|i| {category: i[0], list: create_baking_list_for(i[1])}}
+    @baking_list = Item::CATEGORIES.map{|i| {category: i[0], list: create_baking_list_for(i[1])} }
     render 'home/baker_home'
   end
 
