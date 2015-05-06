@@ -29,7 +29,7 @@ class Ability
     else
       can [:home, :shop, :about, :privacy, :contact], :home
       can [:index, :show], Item
-      can [:new, :create], User
+      can [:new, :create], [User, Customer]
     end
   end
 end
