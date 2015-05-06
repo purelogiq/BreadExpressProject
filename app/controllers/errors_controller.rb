@@ -4,7 +4,6 @@ class ErrorsController < ApplicationController
   end
 
   def internal_error
-    render 'internal_error'
   end
 
   def routing
