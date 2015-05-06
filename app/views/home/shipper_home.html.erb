@@ -5,17 +5,20 @@
 <div class="section white z-depth-5">
   <div class="container">
     <%= render 'partials/flash' %>
-
-    <% @shipping_list.each do |order| %>
-      <h5>To <%= "#{order.address.recipient} at #{format_address_plain(order.address, ", ")}" %></h5>
-      <ul class="collection" style="margin-bottom: 1px">
-        <% order.order_items.unshipped.each do |oi| %>
-          <%= link_to raw("#{oi.quantity} of #{oi.item.name}<span class='badge'>Click to mark as shipped</span>"),
-                      "/shipping_list?order_item_id=#{oi.id}", class: 'collection-item',
-                      confirm: 'Are you sure your ready to mark this as shipped?' %>
-        <% end %>
-      </ul>
-      <span style="color: #888; font-size: .8em">Order placed <%= format_date order.date %></span><br /><br />
+    <% if @shipping_list.nil? || @shipping_list.empty? %>
+      <h5>No items to ship.</h5>
+    <% else %>
+      <% @shipping_list.each do |order| %>
+        <h5>To <%= "#{order.address.recipient} at #{format_address_plain(order.address, ", ")}" %></h5>
+        <ul class="collection" style="margin-bottom: 1px">
+          <% order.order_items.unshipped.each do |oi| %>
+            <%= link_to raw("#{oi.quantity} of #{oi.item.name}<span class='badge'>Click to mark as shipped</span>"),
+                        "/shipping_list?order_item_id=#{oi.id}", class: 'collection-item',
+                        confirm: 'Are you sure your ready to mark this as shipped?' %>
+          <% end %>
+        </ul>
+        <span style="color: #888; font-size: .8em">Order placed <%= format_date order.date %></span><br /><br />
+      <% end %>
     <% end %>
 
   </div>

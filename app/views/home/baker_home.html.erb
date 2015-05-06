@@ -9,8 +9,12 @@
     <% @baking_list.each do |list| %>
       <h5><%= list[:category] %> List</h5>
       <ul class="collection">
-        <% list[:list].each do |key, value| %>
-          <a href="#!" class="collection-item"><%= value %> of <%= key %></a>
+        <% if list[:list].nil? || list[:list].empty? %>
+          <p>No <%= list[:category] %> to bake.</p>
+        <% else %>
+          <% list[:list].each do |key, value| %>
+            <a href="#!" class="collection-item"><%= value %> of <%= key %></a>
+          <% end %>
         <% end %>
       </ul>
       <div class="divider"></div>
