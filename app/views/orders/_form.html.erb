@@ -11,7 +11,7 @@
       </tr>
       </thead>
       <tbody>
-      <% @order.order_items.each do |oi| %>
+      <% @order_items.each do |oi| %>
         <tr>
           <td><%= oi.item.name %></td>
           <td><%= format_price oi.item.current_price %></td>
@@ -21,8 +21,8 @@
       <% end %>
       </tbody>
     </table>
-    <p style="font-size: 1.3em"><span class="bold">Shipping Costs: </span> <%= format_price @order.shipping_costs %></p>
-    <p style="font-size: 1.3em"><span class="bold">Grand Total: </span> <%= format_price @order.grand_total %></p>
+    <p style="font-size: 1.3em"><span class="bold">Shipping Costs: </span> <%= format_price @shipping_cost %></p>
+    <p style="font-size: 1.3em"><span class="bold">Grand Total: </span> <%= format_price @grand_total %></p>
   </div>
 
   <div class="col s6">
