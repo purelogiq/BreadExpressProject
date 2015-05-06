@@ -24,7 +24,6 @@ BreadExpress::Application.routes.draw do
   get 'baking_list' => 'home#baking', as: :baking_list
   get 'shipping_list' => 'home#shipping', as: :shipping_list
   get 'ship_item' => 'home#ship_item', as: :ship_item
-  get 'cylon' => 'errors#cylon', as: :cylon
 
   # Ajax calls
   post 'update_cart' => 'shopping#update_cart', as: :update_cart
