@@ -1,4 +1,4 @@
-## Bread Express
+## Bread Express ##
 
 Bread Express was a final project for my Application Design and Development course (67-272)
 at Carnegie Mellon. It is a mockup pastry store site built with Ruby on Rails that allows users
@@ -7,17 +7,17 @@ orders, customers, and employees.
 
 Some screenshots have been provided in the screenshots folder in you don't want to setup the site.
 
-### Setup
+### Setup ###
 
 1. Clone the repo
 2. Run `bundle install`
 3. Run `rake db:migrate db:populate`
   - This will setup the database with 120 customers, 9 items to buy, and 600 orders.
 4. Run rails server and navigate to http://localhost:3000 (by default)
-5. Login with a regular user account: **username**: user1, **password**: secret (username goes up to user120)
-6. Login with an admin account: _username_: mark, password: secret. From here you can see the other employee accounts, all passwords are `secret`.
+5. Login with a regular user account: *username*: user1, *password*: secret (username goes up to user120)
+6. Login with an admin account: *username*: mark, *password*: secret. From here you can see the other employee accounts, all passwords are `secret`.
 
-### Features
+### Features ###
 This site demonstrates...
 
 - Solid database design skills
@@ -25,7 +25,7 @@ This site demonstrates...
 - Test driven development.
 - Good site design/user experience.
 
-### Improvments
+### Improvments ###
 - I would have like to have made more use of javascript to improve the user experience.
 - I wanted to add some statistics/reporting to the administrator home page but ran out of time.
 - Saving a user's session (and cart) to the database.
