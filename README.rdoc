@@ -1,23 +1,31 @@
-## Notes to graders ##
-This site is responsive but not designed for small mobile screens. About an 1000px of width is needed on at least an 8in wide screen.
-An assumption is made that the bakery doesn't have hundreds of active items at once and so the item listing on the store page is not paginated.
-Please clear browser cache and cookies for localhost before use (or open in new private window/incognito mode). FIrefox is the perffered browser.
-Users can view a list of items by going to /items and details with the item show page BUT the site is designed for them to look at items on the /shop page. The /items page is there for the administrator and to pass cucumber tests.
-I believe I did the extra credit for toggling active/inactive items.
-You may like the errors page...
+## Bread Express
 
+Bread Express was a final project for my Application Design and Development course (67-272)
+at Carnegie Mellon. It is a mockup pastry store site built with Ruby on Rails that allows users
+to sign up and order delicous pastries and also allows the administrator to manage inventory,
+orders, customers, and employees.
 
+Some screenshots have been provided in the screenshots folder in you don't want to setup the site.
 
-## 67-272: Bread Express (imadueme@andrew.cmu.edu) ##
+### Setup
 
-This will be the starter code for the course project in 67-272: Application Design and Development.  More notes will follow depending on the phase of the project.
+1. Clone the repo
+2. Run `bundle install`
+3. Run `rake db:migrate db:populate`
+  - This will setup the database with 120 customers, 9 items to buy, and 600 orders.
+4. Run rails server and navigate to http://localhost:3000 (by default)
+5. Login with a regular user account: **username**: user1, **password**: secret (username goes up to user120)
+6. Login with an admin account: _username_: mark, password: secret. From here you can see the other employee accounts, all passwords are `secret`.
 
-To set this up, clone this repository, run the `bundle install` command to ensure you have all the needed gems and then create the database with `rake db:migrate`.  If you want to populate the system with fictitious, but somewhat realistic data, you can run the `rake db:populate` command.  The populate script will create:
-- 120 customers
-- over 600 orders
-- a menu of 5 types of breads, 3 varieties of muffins and 1 type of pastry
+### Features
+This site demonstrates...
 
-Many objects are created with some element of randomness so you will get slightly different results each time it is run.  However, employee-type users are fixed.  In terms of employee-type users there are two admins -- Alex (username: 'alex') and Mark (username: 'mark') -- and a shipper (username: 'shipper') and a baker (username: 'baker').  All customers have a username which is 'user' with a sequential set of numbers concatentated. (user1 - user120 should exist for you to log in as and experiment.)  All users in the system have a password of 'secret'.  
+- Solid database design skills
+- Good separation of model, view, and controller concerns.
+- Test driven development.
+- Good site design/user experience.
 
-Instructions for what needs to be done for this project can be found in the write-up found on the [67-272 course site](http://67272.cmuis.net/projects).
-
+### Improvments
+- I would have like to have made more use of javascript to improve the user experience.
+- I wanted to add some statistics/reporting to the administrator home page but ran out of time.
+- Saving a user's session (and cart) to the database.
