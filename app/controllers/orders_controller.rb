@@ -35,8 +35,7 @@ class OrdersController < ApplicationController
   def new
     if get_list_of_items_in_cart.empty?
       redirect_to '/shop', alert: "You cannot checkout an empty cart"
-    end
-    if (Address.active.empty? && is_admin?) || (!is_admin? && current_user.customer.addresses.active.empty?)
+    elsif (Address.active.empty? && is_admin?) || (!is_admin? && current_user.customer.addresses.active.empty?)
       redirect_to '/addresses/new', alert: "Please create an address to send the order to."
     end
     @order = Order.new

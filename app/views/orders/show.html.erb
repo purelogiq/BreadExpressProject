@@ -35,7 +35,7 @@
       <% @order.order_items.each do |oi| %>
         <tr>
           <td><%= oi.item.name %></td>
-          <td><%= format_price oi.item.current_price %></td>
+          <td><%= format_price oi.item.price_on_date(@order.date) %></td>
           <td><%= oi.quantity %></td>
           <td><%= format_price oi.subtotal %></td>
         </tr>
