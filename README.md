@@ -5,7 +5,10 @@ at Carnegie Mellon. It is a mockup pastry store site built with Ruby on Rails th
 to sign up and order delicous pastries and also allows the administrator to manage inventory,
 orders, customers, and employees.
 
-Some screenshots have been provided in the screenshots folder in you don't want to setup the site.
+![Screenshot 1](https://github.com/purelogiq/BreadExpressProject/raw/master/screenshots/breadexpress-cart.png)
+![Screenshot 2](https://github.com/purelogiq/BreadExpressProject/raw/master/screenshots/breadexpress-checkout.png)
+![Screenshot 3](https://github.com/purelogiq/BreadExpressProject/raw/master/screenshots/breadexpress-shop.png)
+
 
 ### Setup ###
 
