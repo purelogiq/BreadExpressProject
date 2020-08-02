@@ -1,7 +1,6 @@
 ## Bread Express ##
 
-Bread Express was a final project for my Application Design and Development course (67-272)
-at Carnegie Mellon. It is a mockup pastry store site built with Ruby on Rails that allows users
+It is a mockup pastry store site built with Ruby on Rails that allows users
 to sign up and order delicous pastries and also allows the administrator to manage inventory,
 orders, customers, and employees.
 
