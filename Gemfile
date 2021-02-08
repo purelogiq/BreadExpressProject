@@ -26,7 +26,7 @@ gem 'simple_form', '3.1.0'
 gem 'nested_form', '0.3.2'
 gem 'cancancan', '1.9.2'
 gem 'validates_timeliness', '3.0.14'
-gem 'carrierwave', '0.10.0'
+gem 'carrierwave', '1.3.2'
 gem 'time_date_helpers', '0.0.2'
 
 # Additional gems that are very useful in Rails development
